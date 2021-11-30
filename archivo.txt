@@ -1,0 +1,1 @@
+{"productos":[{"cant":"1","producto":"Ceviche de camaron en salsa roja"}],"cajero":"Erick Nunez","tipo_impresion":"4","panel":"1","fecha":"20-11-2021","hora":"06:13:48","identidad":"0","numero_documento":"52","llevar_aqui":"1"}
