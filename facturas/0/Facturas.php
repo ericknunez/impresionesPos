@@ -19,9 +19,24 @@ class Facturas {
 
 public function ImprimirFactura($data){
     // $data['documento_factura'] = 0; // maneja el tipo de documento a imprimir
-    $printer = "COCINA";
-    $this->Ticket($data, $printer);
+    $printer = "IMPRESORA";
+    if ($data['documento_factura'] == 0) {
+        $this->Ninguno();
+    }
+    if ($data['documento_factura'] == 1) {
+        $this->Ticket($data, $printer);
+    }
+    if ($data['documento_factura'] == 2) {
+        $this->Factura();
+    }
 }
+
+
+public function Ninguno(){
+  $this->AbreCaja();
+}
+
+
 
 public function Ticket($data, $printer){
     $doc = new Documentos();
@@ -44,10 +59,12 @@ public function Ticket($data, $printer){
   $printer -> setJustification(Printer::JUSTIFY_LEFT);
 //   $printer->text($data['empresa_nombre']);
   
-  $printer->text($data['empresa_direccion']);
+  $printer->text("CARRETERA INTERNACIONAL KM 114, METAPAN");
+  // $printer->text($data['empresa_direccion']);
   
   $printer->feed();
-  $printer->text("Tel: " . $data['empresa_telefono']);
+  $printer->text("TELEFONO: 6062-3549");
+  // $printer->text("TELEFONO: " . $data['empresa_telefono']);
   
   $printer->feed();
   $printer->text("TICKET NUMERO: " . $data['numero_documento']);
@@ -70,7 +87,7 @@ public function Ticket($data, $printer){
   
 
   foreach ($data['productos'] as $producto) {
-        $printer -> text($doc->Item($producto['cant'], $producto["producto"], $producto["pv"], $producto["total"])); 
+        $printer -> text($doc->Item($producto['cant'], $producto["producto"], Helpers::Format($producto["pv"]), Helpers::Format($producto["total"]))); 
   }
   
    
@@ -169,11 +186,14 @@ if($data['llevar_aqui'] != NULL){
 }
 
 
+public function Factura(){
+  $this->AbreCaja();
+}
 
 
 
 public function AbreCaja(){
-  $printer = "COCINA";
+  $printer = "IMPRESORA";
 
   $connector = new WindowsPrintConnector($printer);
   $printer = new Printer($connector);

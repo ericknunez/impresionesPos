@@ -36,7 +36,7 @@ if($_POST["identidad"] != NULL){
 	}
 
 	if($_POST["tipo_impresion"] == 2){ /// comanda a cualquier panel
-	include_once 'facturas/'.$_POST["identidad"].'/Comandas.php'; // documento de precuenta
+	include_once 'facturas/'.$_POST["identidad"].'/Comandas.php'; // documento
 		$fac->Comanda($_POST); 
 	}
 
@@ -46,10 +46,12 @@ if($_POST["identidad"] != NULL){
 	}
 
 	if($_POST["tipo_impresion"] == 4){ // / comanda borrda a cualquier panel
+	include_once 'facturas/'.$_POST["identidad"].'/Comandas.php'; // documento
 		$fac->ComandaBorrada($_POST); 
 	}
 
     if($_POST["tipo_impresion"] == 5){ /// solo abre la caja
+	include_once 'facturas/'.$_POST["identidad"].'/Facturas.php'; // documento de precuenta
 		$fac->AbrirCaja($_POST); 
 	}
 }
