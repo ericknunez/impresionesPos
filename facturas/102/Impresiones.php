@@ -33,7 +33,12 @@ public function AbrirCaja($data){
     $doc->AbreCaja($data);
 }
 
-
+// Corte de Cja
+public function Corte($data){
+    $doc = new CorteDeCaja();
+    $printer = "IMPRESORA";
+    $doc->CortePrint($data, $printer);
+}
 
 
 

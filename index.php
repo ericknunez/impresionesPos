@@ -54,6 +54,12 @@ if($_POST["identidad"] != NULL){
 	include_once 'facturas/'.$_POST["identidad"].'/Facturas.php'; // documento de precuenta
 		$fac->AbrirCaja($_POST); 
 	}
+
+	// cortes
+	if($_POST["tipo_impresion"] == 10){ /// Corte de Caja
+		include_once 'facturas/'.$_POST["identidad"].'/Cortes.php'; // documento de precuenta
+			$fac->Corte($_POST); 
+	}
 }
 
 
