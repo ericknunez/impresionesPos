@@ -69,10 +69,10 @@ public function CortePrint($data, $printer){
     $printer -> text($doc->DosCol("TOTAL DE VENTA: ", 40, Helpers::Dinero($data['total_venta']), 10));
     
       
-    $printer -> text($doc->DosCol("TOTAL DE PROPINA: ", 40, Helpers::Dinero($data['propina_efectivo'] + $data['propina_no_efectivo']), 10));
+    $printer -> text($doc->DosCol("TOTAL DE PROPINA: ", 40, Helpers::Dinero($data['propina_efectivo'] + $producto['propina_no_efectivo']), 10));
     
         
-    // $printer -> text($doc->DosCol("TOTAL: ", 40, Helpers::Dinero($producto['total_venta'] + $producto['total_venta']), 10));
+    // $printer -> text($doc->DosCol("TOTAL: ", 40, Helpers::Dinero($data['total_venta'] + $producto['total_venta']), 10));
     
     
       

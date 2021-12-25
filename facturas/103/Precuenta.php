@@ -17,7 +17,7 @@ class Precuenta {
 public function PrecuentaPrint($data, $printer){
     $doc = new Documentos();
     
-    $img  = "C:/laragon/www/impresiones/facturas/0/img/logo.png";
+    $img  = "C:/laragon/www/impresiones/facturas/0/img/villanapoli.png";
   
   $connector = new WindowsPrintConnector($printer);
   $printer = new Printer($connector);
@@ -35,11 +35,11 @@ public function PrecuentaPrint($data, $printer){
   $printer -> setJustification(Printer::JUSTIFY_LEFT);
 //   $printer->text($data['empresa_nombre']);
   
-$printer->text("CARRETERA INTERNACIONAL KM 114, METAPAN");
+$printer->text("Calle a San Salvador Colonia El Mora poste 337, Santa Ana");
 // $printer->text($data['empresa_direccion']);
 
 $printer->feed();
-$printer->text("TELEFONO: 6062-3549");
+$printer->text("TELEFONO: 7907-3196");
 // $printer->text("TELEFONO: " . $data['empresa_telefono']);
   
   $printer->feed();
@@ -53,7 +53,7 @@ $printer->text("TELEFONO: 6062-3549");
   /* Stuff around with left margin */
   $printer->feed();
   $printer -> setJustification(Printer::JUSTIFY_CENTER);
-  $printer -> text("____________________________________________________________");
+  $printer -> text("________________________________________________________");
   $printer -> setJustification(Printer::JUSTIFY_LEFT);
   $printer->feed();
   /* Items */
@@ -70,30 +70,30 @@ $printer->text("TELEFONO: 6062-3549");
   }
   
    
-  $printer -> text("____________________________________________________________");
+  $printer -> text("________________________________________________________");
   $printer->feed();
   
   
   
-  $printer -> text($doc->DosCol("Sub Total " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['subtotal']), 20));
+  $printer -> text($doc->DosCol("Sub Total " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['subtotal']), 10));
   
   
   
 if ($data['propina']) {
-  $printer -> text($doc->DosCol("Propina " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['propina']), 20));
+  $printer -> text($doc->DosCol("Propina " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['propina']), 10));
 }
   
   $printer -> setEmphasis(true);
-  $printer -> text($doc->DosCol("Total " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['total']), 20));
+  $printer -> text($doc->DosCol("Total " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['total']), 10));
   $printer -> setEmphasis(false);
   
   
-  $printer -> text("____________________________________________________________");
+  $printer -> text("________________________________________________________");
   $printer->feed();
   
   
   
-  $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 30));
+  $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 20));
   
   
   $printer -> text("Cajero: " . $data['cajero']);
@@ -137,7 +137,7 @@ if($data['llevar_aqui'] != NULL){
 
   
 
-  $printer -> text("____________________________________________________________");
+  $printer -> text("________________________________________________________");
   $printer->feed();
   
   
