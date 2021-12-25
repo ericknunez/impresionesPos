@@ -112,7 +112,7 @@ public function CortePrint($data, $printer){
     
     $printer -> text($doc->DosCol("EFECTIVO INGRESADO: ", 40, Helpers::Dinero($data['efectivo_final']), 10));
 
-    $printer -> text($doc->DosCol("EFECTIVO DEBIDO: ", 40, Helpers::Dinero($producto['total_efectivo']), 10));
+    $printer -> text($doc->DosCol("EFECTIVO DEBIDO: ", 40, Helpers::Dinero($data['total_efectivo']), 10));
 
     
     
