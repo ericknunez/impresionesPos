@@ -38,10 +38,10 @@ public function CortePrint($data, $printer){
     
     
     
-    $printer -> setJustification(Printer::JUSTIFY_LEFT);
-    $printer -> setEmphasis(true);
-    $printer -> text($doc->Item("Cant", 'Producto', 'Precio', 'Total'));
-    $printer -> setEmphasis(false);
+    // $printer -> setJustification(Printer::JUSTIFY_LEFT);
+    // $printer -> setEmphasis(true);
+    // $printer -> text($doc->Item("Cant", 'Producto', 'Precio', 'Total'));
+    // $printer -> setEmphasis(false);
     
     
 
