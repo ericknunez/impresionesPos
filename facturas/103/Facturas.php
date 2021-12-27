@@ -41,7 +41,7 @@ public function Ninguno(){
 public function Ticket($data, $printer){
     $doc = new Documentos();
     
-    $img  = "C:/laragon/www/impresiones/facturas/0/img/villanapoli.png";
+    $img  = "C:/laragon/www/impresiones/facturas/103/img/villanapoli.jpg";
   
   $connector = new WindowsPrintConnector($printer);
   $printer = new Printer($connector);
@@ -96,16 +96,17 @@ public function Ticket($data, $printer){
   
   
   
-  $printer -> text($doc->DosCol("Sub Total " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['subtotal']), 10));
+  $printer -> text($doc->DosCol("Sub Total " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['total']), 10));
   
   
   
-if ($data['propina']) {
-  $printer -> text($doc->DosCol("Propina " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['propina']), 10));
-}
-  
-  
-  $printer -> text($doc->DosCol("Total " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['total']), 10));
+  if ($data['propina_cant']) {
+    $printer -> text($doc->DosCol("Propina " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['propina_cant']), 10));
+  }
+
+  $printer -> setEmphasis(true);
+  $printer -> text($doc->DosCol("Total " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['propina_cant'] + $data['total']), 10));
+  $printer -> setEmphasis(false);
   
   
   
