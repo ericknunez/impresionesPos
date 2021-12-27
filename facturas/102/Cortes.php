@@ -45,9 +45,9 @@ public function CortePrint($data, $printer){
     
     
 
-    foreach ($data['productos'] as $producto) {
-      $printer -> text($doc->Item( $producto['cant'], $producto['producto'], Helpers::Dinero($producto['pv']), Helpers::Dinero($producto['total']))); 
-    }
+    // foreach ($data['productos'] as $producto) {
+    //   $printer -> text($doc->Item( $producto['cant'], $producto['producto'], Helpers::Dinero($producto['pv']), Helpers::Dinero($producto['total']))); 
+    // }
     
     
     
