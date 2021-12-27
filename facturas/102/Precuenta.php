@@ -38,6 +38,7 @@ public function PrecuentaPrint($data, $printer){
   $printer -> setJustification(Printer::JUSTIFY_LEFT);
 //   $printer->text($data['empresa_nombre']);
   
+  $printer->feed();
   $printer->text("CARRETERA ONGITUDINAL DEL NORTE CANTON TAHUILAPA, CONTIGUO A PISCINAS EL EDEN");
   // $printer->text($data['empresa_direccion']);
   
