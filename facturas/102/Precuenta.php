@@ -79,13 +79,13 @@ public function PrecuentaPrint($data, $printer){
   
   
   
-  $printer -> text($doc->DosCol("Sub Total " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['subtotal']), 20));
+//   $printer -> text($doc->DosCol("Sub Total " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['subtotal']), 20));
   
   
   
-if ($data['propina']) {
-  $printer -> text($doc->DosCol("Propina " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['propina']), 20));
-}
+// if ($data['propina']) {
+//   $printer -> text($doc->DosCol("Propina " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['propina']), 20));
+// }
   
   $printer -> setEmphasis(true);
   $printer -> text($doc->DosCol("Total " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['total']), 20));
