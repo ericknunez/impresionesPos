@@ -35,15 +35,16 @@ public function PrecuentaPrint($data, $printer){
 
   // $printer->bitImage($logo);
   $printer -> setTextSize(1, 2);
-  $printer -> setJustification(Printer::JUSTIFY_LEFT);
+
 //   $printer->text($data['empresa_nombre']);
   
   $printer->feed();
-  $printer->text("CARRETERA ONGITUDINAL DEL NORTE CANTON TAHUILAPA, CONTIGUO A PISCINAS EL EDEN");
+  $printer->text("CARRETERA INTERNACIONAL KM 95");
+  $printer->feed();
+  $printer->text("HACIENDA SAN FRANCISCO GUAJOYO");
   // $printer->text($data['empresa_direccion']);
   
-  $printer->feed();
-  $printer->text("TELEFONO: 7618-7047");
+  $printer -> setJustification(Printer::JUSTIFY_LEFT);
   // $printer->text("TELEFONO: " . $data['empresa_telefono']);
   
   $printer->feed();
