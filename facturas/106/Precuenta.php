@@ -44,8 +44,10 @@ public function PrecuentaPrint($data, $printer){
   $printer->text("HACIENDA SAN FRANCISCO GUAJOYO");
   // $printer->text($data['empresa_direccion']);
   
+  $printer->feed();
   $printer -> setJustification(Printer::JUSTIFY_LEFT);
-  // $printer->text("TELEFONO: " . $data['empresa_telefono']);
+
+  $printer->text("TELEFONO: 9013-3047");
   
   $printer->feed();
   $printer->text("ORDEN NUMERO: " . $data['numero_documento']);
