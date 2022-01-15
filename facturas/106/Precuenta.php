@@ -47,7 +47,7 @@ public function PrecuentaPrint($data, $printer){
   $printer->feed();
   $printer -> setJustification(Printer::JUSTIFY_LEFT);
 
-  $printer->text("TELEFONO: 9013-3047");
+  $printer->text("TELEFONO: 7013-3047");
   
   $printer->feed();
   $printer->text("ORDEN NUMERO: " . $data['numero_documento']);
