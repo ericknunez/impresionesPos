@@ -52,7 +52,7 @@ public function Ninguno(){
 public function Ticket($data, $print){
   $doc = new Documentos();
 
-  $img  = "C:/laragon/www/impresiones/facturas/10/img/sp.jpg";
+  $img  = "C:/appserv/www/impresiones/facturas/10/img/sp.jpg";
 
 
   $connector = new WindowsPrintConnector($print);
