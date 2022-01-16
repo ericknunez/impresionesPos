@@ -1,63 +1,50 @@
  <?php  
-use Mike42\Escpos\EscposImage;
-use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
-use Mike42\Escpos\Printer;
 
+class Impresiones {
 
-
-class Impresiones{
-
-    use Documentos;
-
-    
 
 public function Factura($data){
+    $doc = new Facturas();
+    $doc->ImprimirFactura($data);
+}
 
-    if ($data['documento_factura'] == 1) {
-       $this->Ticket($data);
-    }
+// Solo peara la precuenta del cliente en termico
+public function PreCuenta($data){
+    $doc = new Precuenta();
+    if ($data['caja'] == 1) {
+        $printer = "LR200";   
+      } 
+      if ($data['caja'] == 2) {
+          $printer = "TICKET2"; 
+      } 
+    $doc->PrecuentaPrint($data, $printer);
+}
 
-    if ($data['documento_factura'] == 2) {
-        $this->Documento($data);
-     }
+// comandas para cocina a diferente panel
+public function Comanda($data){
+    $doc = new Comandas();
+    $doc->ImprimirComanda($data);
+}
+
+// comandas borradas para la cocina de diferente panel
+public function ComandaBorrada($data){
+    $doc = new Comandas();
+    $doc->ImprimirComanda($data);
+}
+
+// solo abrir caja segun el cajero
+public function AbrirCaja($data){
+    $doc = new Facturas();
+    $doc->AbreCaja($data);
 }
 
 
-
-
-
- public function Item($cant,  $name = '', $price = '', $total = '', $dollarSign = false)
-    {
-        $rightCols = 8;
-        $leftCols = 38;
-        if ($dollarSign) {
-            $leftCols = $leftCols / 2 - $rightCols / 2;
-        }
-        $left = str_pad($cant . " " . $name, $leftCols) ;
-        
-        $sign = ($dollarSign ? '$ ' : '');
-
-        $total = str_pad($sign . $total, $rightCols, ' ', STR_PAD_LEFT);
-        $right = str_pad($sign . $price, $rightCols, ' ', STR_PAD_LEFT);
-        return "$left$right$total\n";
-    }
-
-
-
- public function DosCol($izquierda = '', $iz, $derecha = '', $der)
-    {
-        $left = str_pad($izquierda, $iz, ' ', STR_PAD_LEFT) ;      
-        $right = str_pad($derecha, $der, ' ', STR_PAD_LEFT);
-        return "$left$right\n";
-    }
-
-
-
-
-
-
-
-
+// Corte de Cja
+public function Corte($data){
+    $doc = new CorteDeCaja();
+    $printer = "LR2000";
+    $doc->CortePrint($data, $printer);
+}
 
 
 

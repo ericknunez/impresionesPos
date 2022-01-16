@@ -13,7 +13,7 @@ public function ImprimirComanda($data){
     // $data['panel'] = 0; // maneja el tipo de panel a imprimir
 
     if ($data['panel'] == 1) {
-        $printer = "IMPRESORA";
+        $printer = "COCINA";
         $panel = "COCINA";
         if ($data['tipo_impresion'] == 2) {
             $this->Comanda($data, $printer, $panel);
@@ -52,7 +52,7 @@ public function Comanda($data, $printer, $panel){
   $printer -> setLineSpacing(80);
   
   
-  $printer -> text("____________________________________________________________");
+  $printer -> text("________________________________________________________");
   $printer->feed();
   
 
@@ -70,14 +70,14 @@ public function Comanda($data, $printer, $panel){
   }
   
    
-  $printer -> text("____________________________________________________________");
+  $printer -> text("________________________________________________________");
   $printer->feed();
   
   $printer -> text("ORDEN NUMERO: " . $data['numero_documento']);
   $printer->feed();
   
   
-  $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 30));
+  $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 20));
   
   
   $printer -> text("Cajero: " . $data['cajero']);
@@ -147,7 +147,7 @@ public function ComandaBorrada($data, $printer, $panel){
   $printer -> setLineSpacing(80);
   
   
-  $printer -> text("____________________________________________________________");
+  $printer -> text("_______________________________________________________");
   $printer->feed();
   
 
@@ -165,14 +165,14 @@ public function ComandaBorrada($data, $printer, $panel){
   }
   
    
-  $printer -> text("____________________________________________________________");
+  $printer -> text("_______________________________________________________");
   $printer->feed();
   
   $printer -> text("ORDEN NUMERO: " . $data['numero_documento']);
   $printer->feed();
   
   
-  $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 30));
+  $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 20));
   
   
   $printer -> text("Cajero: " . $data['cajero']);
