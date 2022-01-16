@@ -194,7 +194,7 @@ public function Factura(){
 
 
 
-public function AbreCaja(){
+public function AbreCaja($datos){
   $printer = "EPSON2";
 
   $connector = new WindowsPrintConnector($printer);

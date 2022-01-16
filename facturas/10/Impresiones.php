@@ -42,7 +42,7 @@ public function AbrirCaja($data){
 // Corte de Cja
 public function Corte($data){
     $doc = new CorteDeCaja();
-    $printer = "LR2000";
+    $printer = "LR200";
     $doc->CortePrint($data, $printer);
 }
 

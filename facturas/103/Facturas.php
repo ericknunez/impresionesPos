@@ -193,7 +193,7 @@ public function Factura(){
 
 
 
-public function AbreCaja(){
+public function AbreCaja($datos){
   $printer = "IMPRESORA";
 
   $connector = new WindowsPrintConnector($printer);
