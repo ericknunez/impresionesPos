@@ -183,9 +183,8 @@ public function Factura($data, $print){
   printer_draw_text($handle, "Tel: " . $data['empresa']['telefono'], 0, $oi);
   $oi=$oi+$n1;
   
-//   $numero1=str_pad($numero, 8, "0", STR_PAD_LEFT);
-  $numero1="000-001-01-" . Helpers::NFactura($data['no_factura']);
-  printer_draw_text($handle, "Factura Numero: " . $numero1, 0, $oi);
+
+  printer_draw_text($handle, "Factura Numero: " . Helpers::NFactura($data['no_factura']), 0, $oi);
   
   
 
@@ -235,10 +234,10 @@ public function Factura($data, $print){
     
   
             $oi=$oi+$n1;
-            printer_draw_text($handle, $scant, 0, $oi);
-            printer_draw_text($handle, $b["producto"], 30, $oi);
-            printer_draw_text($handle, $b["pv"], 240, $oi);
-            printer_draw_text($handle, $stotal, 320, $oi);
+            printer_draw_text($handle, $producto["cant"], 0, $oi);
+            printer_draw_text($handle, $producto["producto"], 30, $oi);
+            printer_draw_text($handle, $producto["pv"], 240, $oi);
+            printer_draw_text($handle, $producto["total"], 320, $oi);
   
             $g="G";
   
@@ -295,8 +294,8 @@ public function Factura($data, $print){
   
   
   $oi=$oi+$n1;
-  printer_draw_text($handle, $fechaf, 0, $oi);
-  printer_draw_text($handle, $horaf, 232, $oi);
+  printer_draw_text($handle, $data['fecha'], 0, $oi);
+  printer_draw_text($handle, $data['hora'], 232, $oi);
   
   
   
@@ -318,7 +317,7 @@ public function Factura($data, $print){
   //////////////////
   
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Cajero: " . $_SESSION['nombre'], 25, $oi);
+  printer_draw_text($handle, "Cajero: " . $data['cajero'], 25, $oi);
   
   
   $oi=$oi+$n1+$n4;
