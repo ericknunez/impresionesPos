@@ -28,7 +28,7 @@ public function ImprimirComanda($data){
       $panel = "BAR";
       if ($data['tipo_impresion'] == 2) {
           // $this->Comanda($data, $printer, $panel);
-          $this->ComandaBar($data, $printer, $panel);
+          $this->ComandaBar($data, $printer);
       }
       if ($data['tipo_impresion'] == 4) {
           // $this->ComandaBorrada($data, $printer, $panel);
@@ -369,7 +369,7 @@ public function ComandaBarBorrada($data, $print){
   
   
   $oi="60";
-  printer_draw_text($handle, "COMANDA DE BAR", 80, $oi);
+  printer_draw_text($handle, "COMANDA DE BAR ELIMINADA", 80, $oi);
   
   
   
