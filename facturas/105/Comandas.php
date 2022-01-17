@@ -213,14 +213,237 @@ if($data['llevar_aqui'] != NULL){
   $printer->feed();
   $printer->cut();
   $printer->close();
-  
-
 
 }
 
 
 
 
+
+
+
+public function ComandaBar($data, $print){
+
+$txt1   = "31"; 
+$txt2   = "11";
+$txt3   = "0";
+$txt4   = "0";
+$n1   = "40";
+$n2   = "60";
+$n3   = "0";
+$n4   = "0";
+
+
+$col1 = 0;
+$col2 = 30;
+$col3 = 340;
+$col4 = 440;
+$col5 = 500;
+// $print
+
+
+$handle = printer_open($print);
+printer_set_option($handle, PRINTER_MODE, "RAW");
+
+printer_start_doc($handle, "Mi Documento");
+printer_start_page($handle);
+
+
+$font = printer_create_font("Arial", $txt1, $txt2, PRINTER_FW_NORMAL, false, false, false, 0);
+printer_select_font($handle, $font);
+
+
+$oi="60";
+printer_draw_text($handle, "COMANDA DE BAR", 80, $oi);
+
+
+
+foreach ($data['productos'] as $producto) {
+  $oi=$oi+$n1;
+  printer_draw_text($handle, $producto['cant'], 0, $oi);
+  printer_draw_text($handle, $producto["producto"], 40, $oi);
+
+  if ($data['subOpcion']) {
+      $i = 0;
+      foreach ($data['subOpcion'] as $opcion) {
+        $oi=$oi+$n1;
+        printer_draw_text($handle, $opcion["nombre"], 0, $oi);
+        $i++;
+      }
+  }
+$printer->feed();
+}
+ 
+
+
+
+$oi=$oi+$n1;
+printer_draw_text($handle, "ORDEN NUMERO: " . $data['numero_documento'], 25, $oi);
+
+
+
+// llevar o comer aqui
+if($data['llevar_aqui'] != NULL){
+  if ($data['llevar_aqui'] == 1) {
+    $tipo = "LLevar";
+  } else {
+    $tipo = "Comer Aqui";
+  }
+}
+
+
+
+
+$oi=$oi+$n2;
+if($data['llevar_aqui'] != NULL){
+  if ($data['llevar_aqui'] == 1) {
+    $tipo = "LLevar";
+  } else {
+    $tipo = "Comer Aqui";
+  }
+printer_draw_text($handle, $tipo, 25, $oi);
+}
+printer_draw_text($handle, "MESA: " . $data['nombre_mesa'], 245, $oi);
+
+
+$font = printer_create_font("Arial", $txt3, $txt4, PRINTER_FW_NORMAL, false, false, false, 0);
+printer_select_font($handle, $font);
+
+$oi=$oi+$n2;
+printer_draw_text($handle, $data['fecha'], 0, $oi);
+printer_draw_text($handle, $data['hora'], 300, $oi);
+
+
+$oi=$oi+$n1;
+printer_draw_text($handle, "Mesero: " . $data['cajero'], 25, $oi);
+
+
+
+$oi=$oi+$n1;
+printer_draw_text($handle, ".", 25, $oi);
+
+
+printer_end_page($handle);
+printer_end_doc($handle);
+printer_close($handle);
+
+}
+
+
+
+
+
+
+
+public function ComandaBarBorrada($data, $print){
+
+  $txt1   = "31"; 
+  $txt2   = "11";
+  $txt3   = "0";
+  $txt4   = "0";
+  $n1   = "40";
+  $n2   = "60";
+  $n3   = "0";
+  $n4   = "0";
+  
+  
+  $col1 = 0;
+  $col2 = 30;
+  $col3 = 340;
+  $col4 = 440;
+  $col5 = 500;
+  // $print
+  
+  
+  $handle = printer_open($print);
+  printer_set_option($handle, PRINTER_MODE, "RAW");
+  
+  printer_start_doc($handle, "Mi Documento");
+  printer_start_page($handle);
+  
+  
+  $font = printer_create_font("Arial", $txt1, $txt2, PRINTER_FW_NORMAL, false, false, false, 0);
+  printer_select_font($handle, $font);
+  
+  
+  $oi="60";
+  printer_draw_text($handle, "COMANDA DE BAR", 80, $oi);
+  
+  
+  
+  foreach ($data['productos'] as $producto) {
+    $oi=$oi+$n1;
+    printer_draw_text($handle, $producto['cant'], 0, $oi);
+    printer_draw_text($handle, $producto["producto"], 40, $oi);
+  
+    if ($data['subOpcion']) {
+        $i = 0;
+        foreach ($data['subOpcion'] as $opcion) {
+          $oi=$oi+$n1;
+          printer_draw_text($handle, $opcion["nombre"], 0, $oi);
+          $i++;
+        }
+    }
+  $printer->feed();
+  }
+   
+  
+  
+  
+  $oi=$oi+$n1;
+  printer_draw_text($handle, "ORDEN NUMERO: " . $data['numero_documento'], 25, $oi);
+  
+  
+  
+  // llevar o comer aqui
+  if($data['llevar_aqui'] != NULL){
+    if ($data['llevar_aqui'] == 1) {
+      $tipo = "LLevar";
+    } else {
+      $tipo = "Comer Aqui";
+    }
+  }
+  
+  
+  
+  
+  $oi=$oi+$n2;
+  if($data['llevar_aqui'] != NULL){
+    if ($data['llevar_aqui'] == 1) {
+      $tipo = "LLevar";
+    } else {
+      $tipo = "Comer Aqui";
+    }
+  printer_draw_text($handle, $tipo, 25, $oi);
+  }
+  printer_draw_text($handle, "MESA: " . $data['nombre_mesa'], 245, $oi);
+  
+  
+  $font = printer_create_font("Arial", $txt3, $txt4, PRINTER_FW_NORMAL, false, false, false, 0);
+  printer_select_font($handle, $font);
+  
+  $oi=$oi+$n2;
+  printer_draw_text($handle, $data['fecha'], 0, $oi);
+  printer_draw_text($handle, $data['hora'], 300, $oi);
+  
+  
+  $oi=$oi+$n1;
+  printer_draw_text($handle, "Mesero: " . $data['cajero'], 25, $oi);
+  
+  
+  
+  $oi=$oi+$n1;
+  printer_draw_text($handle, ".", 25, $oi);
+  
+  
+  printer_end_page($handle);
+  printer_end_doc($handle);
+  printer_close($handle);
+  
+  }
+  
+
+  
 
 
 
