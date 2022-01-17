@@ -273,7 +273,6 @@ foreach ($data['productos'] as $producto) {
         $i++;
       }
   }
-$printer->feed();
 }
  
 
@@ -357,15 +356,16 @@ public function ComandaBarBorrada($data, $print){
   // $print
   
   
-  $handle = printer_open($print);
-  printer_set_option($handle, PRINTER_MODE, "RAW");
-  
-  printer_start_doc($handle, "Mi Documento");
-  printer_start_page($handle);
-  
-  
-  $font = printer_create_font("Arial", $txt1, $txt2, PRINTER_FW_NORMAL, false, false, false, 0);
-  printer_select_font($handle, $font);
+
+$handle = printer_open($print);
+printer_set_option($handle, PRINTER_MODE, "RAW");
+
+printer_start_doc($handle, "Mi Documento");
+printer_start_page($handle);
+
+
+$font = printer_create_font("Arial", $txt1, $txt2, PRINTER_FW_NORMAL, false, false, false, 0);
+printer_select_font($handle, $font);
   
   
   $oi="60";
@@ -386,7 +386,6 @@ public function ComandaBarBorrada($data, $print){
           $i++;
         }
     }
-  $printer->feed();
   }
    
   
