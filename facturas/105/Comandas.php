@@ -27,10 +27,12 @@ public function ImprimirComanda($data){
       $printer = "PRINTER-BAR";
       $panel = "BAR";
       if ($data['tipo_impresion'] == 2) {
-          $this->Comanda($data, $printer, $panel);
+          // $this->Comanda($data, $printer, $panel);
+          $this->ComandaBar($data, $printer, $panel);
       }
       if ($data['tipo_impresion'] == 4) {
-          $this->ComandaBorrada($data, $printer, $panel);
+          // $this->ComandaBorrada($data, $printer, $panel);
+          $this->ComandaBarBorrada($data, $printer);
       }
   }
     /// DECLARAR EL PANEL DOS AQUI ABAJO CON LA IMPRESORA Y EL NOMBRE DEL PANEL
