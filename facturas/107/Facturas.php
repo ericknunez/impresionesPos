@@ -164,7 +164,7 @@ public function Ticket($data, $printer){
     
     $oi=$oi+$n2;
     printer_draw_text($handle, "Propina " . $data['tipo_moneda'] . ":", 160, $oi);
-    printer_draw_text($handle, Helpers::Format($data['propina']),$col4, $oi);
+    printer_draw_text($handle, Helpers::Format($data['propina_cant']),$col4, $oi);
  
     
     
