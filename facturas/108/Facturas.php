@@ -42,7 +42,7 @@ public function Ninguno(){
 public function Ticket($data, $printer){
     $doc = new Documentos();
     
-    $img  = "C:/Appserv/www/impresiones/facturas/108/img/logo.jpg";
+    $img  = "C:/laragon/www/impresiones/facturas/108/img/logo.jpg";
   
   $connector = new WindowsPrintConnector($printer);
   $printer = new Printer($connector);
@@ -63,7 +63,7 @@ public function Ticket($data, $printer){
   $printer->text("4ta Calle Pte y 3ra Av Sur, Calle Valiente. Metapán");
   
   $printer->feed();
-  $printer->text("TELEFONO: " . $data['empresa_telefono']);
+  $printer->text("TELEFONO: 7523-6272" . $data['empresa_telefono']);
 
   
   $printer->feed();

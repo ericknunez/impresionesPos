@@ -1,3 +1,4 @@
+
  <?php
 
 use Mike42\Escpos\EscposImage;
@@ -24,15 +25,15 @@ public function ImprimirComanda($data){
     }
 
     if ($data['panel'] == 2) {
-      $printer = "BAR";
+      $printer = "BAR2";
       $panel = "BAR";
       if ($data['tipo_impresion'] == 2) {
-          // $this->Comanda($data, $printer, $panel);
-          $this->ComandaBar($data, $printer);
+          $this->Comanda($data, $printer, $panel);
+          // $this->Comanda($data, $printer);
       }
       if ($data['tipo_impresion'] == 4) {
-          // $this->ComandaBorrada($data, $printer, $panel);
-          $this->ComandaBarBorrada($data, $printer);
+           $this->ComandaBorrada($data, $printer, $panel);
+          // $this->ComandaBorrada($data, $printer);
       }
     }
 
@@ -72,9 +73,9 @@ $printer->feed();
 
 foreach ($data['productos'] as $producto) {
       $printer -> text($producto['cant'] . " - " . $producto["producto"]); 
-      if ($data['subOpcion']) {
+      if ($producto['subOpcion']) {
           $i = 0;
-          foreach ($data['subOpcion'] as $opcion) {
+          foreach ($producto['subOpcion'] as $opcion) {
             $printer->feed();
             $printer -> text("*" . $opcion["nombre"]); 
             $i++;
@@ -167,9 +168,9 @@ $printer->feed();
 
 foreach ($data['productos'] as $producto) {
       $printer -> text($producto['cant'] . " - " . $producto["producto"]); 
-      if ($data['subOpcion']) {
+      if ($producto['subOpcion']) {
           $i = 0;
-          foreach ($data['subOpcion'] as $opcion) {
+          foreach ($producto['subOpcion'] as $opcion) {
             $printer->feed();
             $printer -> text("*" . $opcion["nombre"]); 
             $i++;
