@@ -147,6 +147,7 @@ if($data['llevar_aqui'] != NULL){
   
   
   $printer->feed();
+  $printer->pulse();
   $printer->cut();
   $printer->close();
   
