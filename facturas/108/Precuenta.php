@@ -23,6 +23,8 @@ public function PrecuentaPrint($data, $printer){
   $printer = new Printer($connector);
   $printer -> initialize();
   
+  $printer->pulse();
+
   $printer -> setFont(Printer::FONT_B);
   
   $printer -> setTextSize(1, 2);
@@ -147,7 +149,6 @@ if($data['llevar_aqui'] != NULL){
   
   
   $printer->feed();
-  $printer->pulse();
   $printer->cut();
   $printer->close();
   
