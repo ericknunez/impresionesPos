@@ -30,66 +30,22 @@ public function CortePrint($data, $printer){
     
     $printer -> text("RESUMEN DE CORTE DE CAJA");
     
-    /* Stuff around with left margin */
-    $printer->feed();
-    $printer -> text("_______________________________________________________");
-    $printer->feed();
-    /* Items */
-    
-    
-    
-    $printer -> setJustification(Printer::JUSTIFY_LEFT);
-    $printer -> setEmphasis(true);
-    $printer -> text($doc->Item("Cant", 'Producto', 'Precio', 'Total'));
-    $printer -> setEmphasis(false);
-    
-    
-
-    foreach ($data['productos'] as $producto) {
-      $printer -> text($doc->Item( $producto['cant'], $producto['producto'], Helpers::Dinero($producto['pv']), Helpers::Dinero($producto['total']))); 
-    }
-    
-    
     
     $printer -> text("_______________________________________________________");
     $printer->feed();
     
        
     
-    $printer -> text($doc->DosCol("VENTA EN EFECTIVO: ", 40, Helpers::Dinero($data['total_efectivo']), 10));
-    
-    $printer -> text($doc->DosCol("PROPINA EN EFECTIVO: ", 40, Helpers::Dinero($data['propina_efectivo']), 10));
-    
-    $printer -> text($doc->DosCol("VENTA CON TARJETA: ", 40, Helpers::Dinero($data['total_tarjeta']), 10));
-    
-    $printer -> text($doc->DosCol("PROPINA CON TARJETA: ", 40, Helpers::Dinero($data['propina_no_efectivo']), 10));
-    
-    
-    
     $printer -> text($doc->DosCol("TOTAL DE VENTA: ", 40, Helpers::Dinero($data['total_venta']), 10));
     
-      
-    $printer -> text($doc->DosCol("TOTAL DE PROPINA: ", 40, Helpers::Dinero($data['propina_efectivo'] + $producto['propina_no_efectivo']), 10));
-    
-        
-    // $printer -> text($doc->DosCol("TOTAL: ", 40, Helpers::Dinero($data['total_venta'] + $producto['total_venta']), 10));
-    
-    
+
+
       
     $printer -> text("_______________________________________________________");
     $printer->feed();
     
     
-    
-    
-    // $printer -> text($doc->DosCol("TICKET ELIMINADOS: ", 40, $counte, 10));
-    
-    
-    // $printer -> text("_______________________________________________________");
-    // $printer->feed();
-    
-    
-    
+
     
     
     
@@ -122,26 +78,6 @@ public function CortePrint($data, $printer){
     $printer->feed();
     
     
-    
-    
-//     $printer -> text("ORDENES ELIMINADAS: ");
-//     $printer->feed();
-    
-//     $printer -> setJustification(Printer::JUSTIFY_LEFT);
-//     $printer -> setEmphasis(true);
-//     $printer -> text($doc->Item('Cant', 'Descripcion', 'Total', null));
-//     $printer -> setEmphasis(false);
-    
-    
-//     $printer -> text("_______________________________________________________");
-//     $printer->feed();
-    
-    
-    
-// foreach ($variable as $key => $value) {
-//   $printer -> text($doc->Item("(" . $b["mesa"] . ") " . $b["cant"], $b["producto"], NULL ,$b["total"]));
-  
-// }
     
     
     
