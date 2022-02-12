@@ -34,6 +34,9 @@ public function CortePrint($data, $printer){
     $printer -> text("_______________________________________________________");
     $printer->feed();
     
+    $printer -> text($doc->DosCol("CAJERO: ", 40, $data['cajero'], 10));
+    $printer -> text($doc->DosCol("CAJA: ", 40, $data['caja'], 10));
+
        
     
     $printer -> text($doc->DosCol("TOTAL DE VENTA: ", 40, Helpers::Dinero($data['total_venta']), 10));
