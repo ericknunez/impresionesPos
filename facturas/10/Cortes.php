@@ -36,7 +36,9 @@ public function CortePrint($data, $printer){
     $printer->feed();
     
     $printer -> text("CAJERO: " . $data['cajero']);
+    $printer->feed();
     $printer -> text($doc->DosCol("CAJA: ", 40, $data['caja'], 10));
+    $printer->feed();
 
        
     
