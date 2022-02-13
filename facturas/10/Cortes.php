@@ -29,12 +29,13 @@ public function CortePrint($data, $printer){
     $printer -> setJustification(Printer::JUSTIFY_CENTER);
     
     $printer -> text("RESUMEN DE CORTE DE CAJA");
+    $printer->feed();
     
     
     $printer -> text("_______________________________________________________");
     $printer->feed();
     
-    $printer -> text($doc->DosCol("CAJERO: ", 40, $data['cajero'], 10));
+    $printer -> text($doc->DosCol("CAJERO: ", 20, $data['cajero'], 10));
     $printer -> text($doc->DosCol("CAJA: ", 40, $data['caja'], 10));
 
        
