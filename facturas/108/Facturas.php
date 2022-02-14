@@ -151,11 +151,10 @@ public function Ticket($data, $printer){
   
   
   // nombre de mesa
-  if($data['nombre_mesa'] != NULL){
-    $printer -> text("Mesa: " . $data['nombre_mesa']);
-     $printer->feed();
+  if($data['mesa']['nombre_mesa'] != NULL){
+    $printer -> text("Mesa: " . $data['mesa']['nombre_mesa']);
+    $printer->feed();
   }
-  
   
 // llevar o comer aqui
 if($data['llevar_aqui'] != NULL){
