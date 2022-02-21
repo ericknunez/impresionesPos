@@ -57,7 +57,7 @@ public function PrecuentaPrint($data, $printer){
     printer_draw_text($handle, "2a Av. Norte, Finca Buenos Aires", 0, $oi);
     
     $oi=$oi+$n1;
-    printer_draw_text($handle, "Tel: 2450-5034", 0, $oi);
+    printer_draw_text($handle, "Tel: 2450-5377", 0, $oi);
     $oi=$oi+$n1;
     
     //$numero1=str_pad($numero, 8, "0", STR_PAD_LEFT);
@@ -118,7 +118,7 @@ public function PrecuentaPrint($data, $printer){
         $oi=$oi+$n1;
         printer_draw_text($handle, "Mesa: " . $data['mesa']['nombre_mesa'], 25, $oi);
         
-      }
+    }
     
     
     $oi=$oi+$n1+$n4;
