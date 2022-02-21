@@ -114,6 +114,11 @@ public function PrecuentaPrint($data, $printer){
     $oi=$oi+$n1;
     printer_draw_text($handle, "Cajero: " . $data['cajero'], 25, $oi);
     
+    if($data['mesa']['nombre_mesa'] != NULL){
+        $oi=$oi+$n1;
+        printer_draw_text($handle, "Mesa: " . $data['mesa']['nombre_mesa'], 25, $oi);
+        
+      }
     
     
     $oi=$oi+$n1+$n4;
