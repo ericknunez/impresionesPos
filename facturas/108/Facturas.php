@@ -69,7 +69,7 @@ public function Ticket($data, $printer){
 
   
   $printer->feed();
-  $printer->text("TICKET NUMERO: " . $data['numero_documento']);
+  $printer->text("TICKET NUMERO: " . $data['no_factura']);
 
   
   

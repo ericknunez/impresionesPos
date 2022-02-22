@@ -62,7 +62,7 @@ public function PrecuentaPrint($data, $printer){
     
     //$numero1=str_pad($numero, 8, "0", STR_PAD_LEFT);
     //$numero1="000-001-01-$numero1";
-    printer_draw_text($handle, "Factura Numero: " . $data['numero_documento'], 0, $oi);
+    printer_draw_text($handle, "Factura Numero: " . $data['no_factura'], 0, $oi);
     
     
     

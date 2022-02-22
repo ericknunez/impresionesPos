@@ -111,7 +111,7 @@ public function Ticket($data, $printer){
     
     
     $oi=$oi+$n1;
-    printer_draw_text($handle, "TICKET NUMERO: " . $data['numero_documento'], 0, $oi);
+    printer_draw_text($handle, "TICKET NUMERO: " . $data['no_factura'], 0, $oi);
     
     $oi=$oi+$n1+5;
     printer_draw_text($handle, "Autorizacion: ASC-15041-036616-2021", 0, $oi);
