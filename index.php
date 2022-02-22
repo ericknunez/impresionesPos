@@ -5,7 +5,7 @@ include_once 'common/Fechas.php';
 include_once 'common/Helpers.php';
 
 
-$file = fopen("archivo.txt", "w");
+$file = fopen("archivos/". Helpers::TimeId() . ".json", "w");
 fwrite($file, json_encode($_POST));
 fclose($file);
 
@@ -66,6 +66,17 @@ if($_POST["identidad"] != NULL){
 
 
 
+// busca todos los archivos en el directorio
+$archivos = glob("archivos/*.json");  
+  foreach($archivos as $data){ 
+
+  	$archivo = str_replace("archivos/", "", $data);
+  	$nombre = str_replace(".json", "", $archivo);
+
+	if ($nombre < (Helpers::TimeId() - 3600) and file_exists($data)) {
+		@unlink($data); 
+	} 
+} // termina busqueda de archivos en la carpeta
 
 
 

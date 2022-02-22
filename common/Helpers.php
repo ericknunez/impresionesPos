@@ -121,7 +121,7 @@ public static function HashId(){
 
 
 public static function TimeId(){
-  $id = strtotime(date("H:i:s"));
+  $id = strtotime(date("Y-m-d H:i:s"));
   return $id;
 }
 
