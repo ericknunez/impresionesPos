@@ -199,25 +199,29 @@ public function Factura($data, $print){
   printer_draw_text($handle, "Fecha Limite: 14-02-2023", 0, $oi);
   ////////////////
   ///
-  
+  if ($data['cliente']['cliente']) {
+    $oi=$oi+$n3;
+    printer_draw_text($handle, "Cliente: " . $data['cliente']['cliente'], 0, $oi); 
+    $oi=$oi+$n1;
+    printer_draw_text($handle, "RTN: " . $data['cliente']['documento'], 0, $oi);     
+  }
 
   /// nuevos datos exonerados
   $oi=$oi+$n1;
   printer_draw_text($handle, "Datos del Adquiriente Exonerado:", 0, $oi);
   $oi=$oi+$n1;
   printer_draw_text($handle, "NO. OCE:", 0, $oi);
-  printer_draw_text($handle, $_SESSION["nooce"], 232, $oi);
+  // printer_draw_text($handle, $_SESSION["nooce"], 232, $oi);
   $oi=$oi+$n1;
   printer_draw_text($handle, "NO. REG EXON:", 0, $oi);
-  printer_draw_text($handle, $_SESSION["regexon"], 232, $oi);
+  // printer_draw_text($handle, $_SESSION["regexon"], 232, $oi);
   $oi=$oi+$n1;
   printer_draw_text($handle, "NO. CARNET DIPL:", 0, $oi);
-  printer_draw_text($handle, $_SESSION["nocarnet"], 232, $oi);
+  // printer_draw_text($handle, $_SESSION["nocarnet"], 232, $oi);
   $oi=$oi+$n1;
   printer_draw_text($handle, "NO. SAG:", 0, $oi);
-  printer_draw_text($handle, $_SESSION["nosag"], 232, $oi);
-  ///
-  ///
+  // printer_draw_text($handle, $_SESSION["nosag"], 232, $oi);
+
   ///
   ///
   $oi=$oi+$n2;
