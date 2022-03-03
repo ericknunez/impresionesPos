@@ -5,7 +5,7 @@ include_once 'common/Fechas.php';
 include_once 'common/Helpers.php';
 
 
-$file = fopen("archivos/". Helpers::TimeId() . ".json", "w");
+$file = fopen("archivos/". Helpers::TimeId() . Helpers::HashId() .".json", "w");
 fwrite($file, json_encode($_POST));
 fclose($file);
 
