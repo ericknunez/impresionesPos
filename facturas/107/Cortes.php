@@ -162,6 +162,15 @@ public function CortePrint($data, $printer){
 
 
 
+public function CorteZ($data, $printer){
+
+}
+
+
+
+public function ReporteDiario($data, $printer){
+
+}
 
 
 

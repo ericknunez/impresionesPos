@@ -60,6 +60,14 @@ if($_POST["identidad"] != NULL){
 		include_once 'facturas/'.$_POST["identidad"].'/Cortes.php'; // documento de precuenta
 			$fac->Corte($_POST); 
 	}
+	if($_POST["tipo_impresion"] == 11){ /// Corte Z
+		include_once 'facturas/'.$_POST["identidad"].'/Cortes.php'; // documento de precuenta
+			$fac->CorteZ($_POST); 
+	}
+	if($_POST["tipo_impresion"] == 12){ /// Reporte Diario
+		include_once 'facturas/'.$_POST["identidad"].'/Cortes.php'; // documento de precuenta
+			$fac->ReporteDiario($_POST); 
+	}
 }
 
 

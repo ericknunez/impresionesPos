@@ -41,6 +41,18 @@ public function Corte($data){
     $doc->CortePrint($data, $printer);
 }
 
+public function CorteZ($data){
+    $doc = new CorteDeCaja();
+    $printer = "IMPRESORA";
+    $doc->CorteZ($data, $printer);
+}
+
+// Reporte
+public function ReporteDiario($data){
+    $doc = new CorteDeCaja();
+    $printer = "IMPRESORA";
+    $doc->ReporteDiario($data, $printer);
+}
 
 
 }// class
