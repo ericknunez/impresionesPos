@@ -40,7 +40,9 @@ public function ImprimirFactura($data){
               $printer = "FACTURAS2"; 
               $printer_ticket = "TICKET2"; 
           } 
-        $this->Ticket($data, $printer_ticket);
+        if (!$data['reimprimir']) {
+          $this->Ticket($data, $printer_ticket);
+        }
         $this->Factura($data, $printer);
     }
 }
