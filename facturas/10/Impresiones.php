@@ -12,7 +12,7 @@ public function Factura($data){
 public function PreCuenta($data){
     $doc = new Precuenta();
     if ($data['caja'] == 1) {
-        $printer = "LR200";   
+        $printer = "TICKET1";   
       } 
     if ($data['caja'] == 2) {
         $printer = "TICKET2"; 
@@ -45,7 +45,7 @@ public function AbrirCaja($data){
 public function Corte($data){
     $doc = new CorteDeCaja();
     if ($data['caja'] == 1) {
-        $printer = "LR200";   
+        $printer = "TICKET1";   
       } 
     if ($data['caja'] == 2) {
         $printer = "TICKET2"; 
@@ -58,7 +58,7 @@ public function Corte($data){
 public function CorteZ($data){
     $doc = new CorteDeCaja();
     if ($data['caja'] == 1) {
-        $printer = "LR200";   
+        $printer = "TICKET1";   
       } 
     if ($data['caja'] == 2) {
         $printer = "TICKET2"; 

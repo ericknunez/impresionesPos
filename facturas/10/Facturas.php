@@ -24,7 +24,7 @@ public function ImprimirFactura($data){
     }
     if ($data['documento_factura'] == 1) {
         if ($data['caja'] == 1) {
-          $printer = "LR200";   
+          $printer = "TICKET1";   
         } 
         if ($data['caja'] == 2) {
             $printer = "TICKET2"; 
@@ -34,7 +34,7 @@ public function ImprimirFactura($data){
     if ($data['documento_factura'] == 2) {
           if ($data['caja'] == 1) {
             $printer = "EPSON TM-U220 Receipt"; 
-            $printer_ticket = "LR200";   
+            $printer_ticket = "TICKET1";   
           } 
           if ($data['caja'] == 2) {
               $printer = "FACTURAS2"; 
@@ -351,7 +351,7 @@ public function Factura($data, $print){
 
 public function AbreCaja($data){
   if ($data['caja'] == 1) {
-    $printer = "LR200";   
+    $printer = "TICKET1";   
   } 
   if ($data['caja'] == 2) {
       $printer = "TICKET2"; 
