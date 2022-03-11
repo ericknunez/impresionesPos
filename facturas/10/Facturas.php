@@ -335,7 +335,13 @@ public function Factura($data, $print){
   
   $oi=$oi+$n1+$n2;
   printer_draw_text($handle, ".", NULL, $oi);
-  printer_write($handle, chr(27).chr(112).chr(48).chr(55).chr(121)); //enviar pulso
+
+  if ($data['caja'] == 2) {
+    $num = rand(1, 3);
+    if ($num == 1) {
+      printer_write($handle, chr(27).chr(112).chr(48).chr(55).chr(121)); //enviar pulso
+    }
+  } 
   
   
   
