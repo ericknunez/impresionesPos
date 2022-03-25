@@ -162,6 +162,8 @@ public function Factura($data, $print){
   $font = printer_create_font("Arial", $txt1, $txt2, PRINTER_FW_NORMAL, false, false, false, 0);
   printer_select_font($handle, $font);
   
+  if ($data['caja'] == 2) {
+
 
   printer_draw_text($handle, $data['empresa']['empresa_nombre'], 110, $oi);
   
@@ -329,6 +331,9 @@ public function Factura($data, $print){
 
 
   printer_write($handle, chr(27).chr(112).chr(48).chr(55).chr(121)); //enviar pulso
+
+  
+  }
   
 
   
