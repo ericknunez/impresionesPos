@@ -29,6 +29,9 @@ public function ImprimirFactura($data){
         if ($data['caja'] == 2) {
             $printer = "TICKET2"; 
         } 
+        if ($data['caja'] == 3) {
+          $printer = "TICKET2"; 
+        } 
         $this->Ticket($data, $printer);
     }
     if ($data['documento_factura'] == 2) {
@@ -39,6 +42,10 @@ public function ImprimirFactura($data){
           if ($data['caja'] == 2) {
               $printer = "FACTURAS2"; 
               $printer_ticket = "TICKET2"; 
+          } 
+          if ($data['caja'] == 3) {
+            $printer = "FACTURAS2"; 
+            $printer_ticket = "TICKET2"; 
           } 
         if (!$data['reimprimir']) {
           $this->Ticket($data, $printer_ticket);
