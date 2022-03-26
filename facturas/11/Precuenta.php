@@ -17,7 +17,7 @@ class Precuenta {
 public function PrecuentaPrint($data, $printer){
     $doc = new Documentos();
     
-    $img  = "C:/laragon/www/impresiones/facturas/103/img/villanapoli.jpg";
+    $img  = "C:/laragon/www/impresiones/facturas/11/img/logo.jpg";
   
   $connector = new WindowsPrintConnector($printer);
   $printer = new Printer($connector);

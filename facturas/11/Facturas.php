@@ -23,23 +23,12 @@ public function ImprimirFactura($data){
         $this->Ninguno();
     }
     if ($data['documento_factura'] == 1) {
-        if ($data['caja'] == 1) {
-          $printer = "LR200";   
-        } 
-        if ($data['caja'] == 2) {
-            $printer = "TICKET2"; 
-        } 
+        $printer = "EPSON TM-T20II Receipt"; 
         $this->Ticket($data, $printer);
     }
     if ($data['documento_factura'] == 2) {
-          if ($data['caja'] == 1) {
-            $printer = "EPSON TM-U220 Receipt"; 
-            $printer_ticket = "LR200";   
-          } 
-          if ($data['caja'] == 2) {
-              $printer = "FACTURAS2"; 
-              $printer_ticket = "TICKET2"; 
-          } 
+        $printer = "EPSON TM-U220 Receipt"; 
+        $printer_ticket = "EPSON TM-T20II Receipt";   
         $this->Ticket($data, $printer_ticket);
         $this->Factura($data, $printer);
     }
@@ -55,7 +44,7 @@ public function Ninguno(){
 public function Ticket($data, $print){
   $doc = new Documentos();
 
-  $img  = "C:/Appserv/www/impresiones/facturas/10/img/sp.jpg";
+  $img  = "C:/Appserv/www/impresiones/facturas/11/img/logo.jpg";
 
 
   $connector = new WindowsPrintConnector($print);
@@ -344,12 +333,9 @@ public function Factura($data, $print){
 
 
 public function AbreCaja($data){
-  if ($data['caja'] == 1) {
-    $printer = "LR200";   
-  } 
-  if ($data['caja'] == 2) {
-      $printer = "TICKET2"; 
-  } 
+
+  $printer = "EPSON TM-T20II Receipt"; 
+
   $connector = new WindowsPrintConnector($printer);
   $printer = new Printer($connector);
   $printer->pulse();

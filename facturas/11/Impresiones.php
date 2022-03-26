@@ -49,28 +49,14 @@ public function Corte($data){
 
 public function CorteZ($data){
     $doc = new CorteDeCaja();
-    if ($data['caja'] == 1) {
-        $printer = "LR200";   
-      } 
-    if ($data['caja'] == 2) {
-        $printer = "TICKET2"; 
-    } else {
-        $printer = "TICKET2"; 
-    }
+    $printer = "EPSON TM-T20II Receipt"; 
     $doc->CorteZ($data, $printer);
 }
 
 // Reporte
 public function ReporteDiario($data){
     $doc = new CorteDeCaja();
-    if ($data['caja'] == 1) {
-        $printer = "EPSON TM-U220 Receipt";   
-      } 
-    if ($data['caja'] == 2) {
-        $printer = "FACTURAS2"; 
-    } else {
-        $printer = "FACTURAS2"; 
-    }
+    $printer = "EPSON TM-U220 Receipt"; 
     $doc->ReporteDiario($data, $printer);
 }
 
