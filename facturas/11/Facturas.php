@@ -23,12 +23,12 @@ public function ImprimirFactura($data){
         $this->Ninguno();
     }
     if ($data['documento_factura'] == 1) {
-        $printer = "EPSON TM-T20II Receipt"; 
+        $printer = "TICKET"; 
         $this->Ticket($data, $printer);
     }
     if ($data['documento_factura'] == 2) {
-        $printer = "EPSON TM-U220 Receipt"; 
-        $printer_ticket = "EPSON TM-T20II Receipt";   
+        $printer = "FACTURA"; 
+        $printer_ticket = "TICKET";   
         $this->Ticket($data, $printer_ticket);
         $this->Factura($data, $printer);
     }
@@ -334,7 +334,7 @@ public function Factura($data, $print){
 
 public function AbreCaja($data){
 
-  $printer = "EPSON TM-T20II Receipt"; 
+  $printer = "TICKET"; 
 
   $connector = new WindowsPrintConnector($printer);
   $printer = new Printer($connector);
