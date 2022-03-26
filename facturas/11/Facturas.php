@@ -158,9 +158,9 @@ public function Factura($data, $print){
   $oi=$oi+$n1;
   printer_draw_text($handle, "y ensaladas, etc", 120, $oi);
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Bo. El centro 1/2 Cdra al Este", 0, $oi);
+  printer_draw_text($handle, "Mercado Concepcion, 1/2 cdra al sur", 0, $oi);
   $oi=$oi+$n1;
-  printer_draw_text($handle, "del Elektra, Choluteca, Honduras.", 0, $oi);
+  printer_draw_text($handle, "de farmacia San Jose, Choluteca, Honduras.", 0, $oi);
   
   //printer_draw_text($handle, $_SESSION['config_direccion'], 0, $oi);
   // $oi=$oi+$n1;
@@ -181,9 +181,9 @@ public function Factura($data, $print){
   
 
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Fact. Inicial: 000-001-01-00400001", 0, $oi);
+  printer_draw_text($handle, "Fact. Inicial: 000-001-01-00084001", 0, $oi);
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Fact. Final:  000-001-01-00850000", 0, $oi);
+  printer_draw_text($handle, "Fact. Final:  000-001-01-00094000", 0, $oi);
   $oi=$oi+$n1;
   printer_draw_text($handle, "Fecha Limite: 14-02-2022", 0, $oi);
   ////////////////
@@ -298,7 +298,7 @@ public function Factura($data, $print){
   printer_draw_text($handle, "CAI:", 0, $oi);
   $oi=$oi+$n1;
   
-  printer_draw_text($handle, "B9CC25-15D031-F242AB-106341-2E2CEF-1C", 0, $oi);
+  printer_draw_text($handle, "64961A-5770FD-FA4A99-877686-AAA537-00", 0, $oi);
   printer_delete_font($font);
   ///// termina cai
   
