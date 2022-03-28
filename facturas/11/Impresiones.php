@@ -56,4 +56,7 @@ public function ReporteDiario($data){
 }
 
 
+
+
+
 }// class
