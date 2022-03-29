@@ -87,13 +87,13 @@ public function Ticket($data, $print){
   $printer->feed();
 
 
-  $printer -> text($doc->DosCol("Total " . $data['tipo_moneda'] . ":", 30, Helpers::Format($data['total']), 20));
+  $printer -> text($doc->DosCol("Total " . $data['tipo_moneda'] . ":", 38, Helpers::Format($data['total']), 20));
 
 
-  $printer -> text($doc->DosCol("Efectivo " . $data['tipo_moneda'] . ":", 30, Helpers::Format($data['efectivo']), 20));
+  $printer -> text($doc->DosCol("Efectivo " . $data['tipo_moneda'] . ":", 38, Helpers::Format($data['efectivo']), 20));
 
   //cambio
-  $printer -> text($doc->DosCol("Cambio " . $data['tipo_moneda'] . ":", 30, Helpers::Format($data['cambio']), 20));
+  $printer -> text($doc->DosCol("Cambio " . $data['tipo_moneda'] . ":", 38, Helpers::Format($data['cambio']), 20));
 
 
   $printer->feed();
