@@ -100,7 +100,7 @@ public function Ticket($data, $print){
 
 
 
-  $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 30));
+  $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 20));
 
 
   $printer->feed();
