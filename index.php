@@ -1,4 +1,4 @@
-<?php //Ejemplo aprenderaprogramar.com, archivo escribir.php
+<?php
 header('Access-Control-Allow-Origin: *');
 include_once 'common/Dinero.php';
 include_once 'common/Fechas.php';

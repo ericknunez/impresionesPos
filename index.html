@@ -1,0 +1,86 @@
+<head>
+    <title>Servidor de Impresiones</title>
+    <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- <script defer src="https://unpkg.com/alpinejs@3.9.3/dist/cdn.min.js"></script> -->
+
+
+  </head>
+  <body>
+    <h1>Pusher Test</h1>
+    <p>
+      Try publishing an event to channel <code>my-channel</code>
+      with event name <code>my-event</code>.
+    </p>
+
+    <!-- <button x-on:click="console.log('clicked')">Actualizar</button> -->
+
+    <script>
+
+
+        function obtenerDatos(){
+            axios.get('https://posrestaurant.hibridosv.com/api/impresiones')
+            .then(function (response) {
+                // handle success
+                enviar(JSON.stringify(response.data));
+
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+        }
+
+
+        async function obtenerCantidad(){
+            axios.get('https://posrestaurant.hibridosv.com/api/impresiones/cantidad')
+            .then(function (response) {
+                // handle success
+                // console.log(response.data.cantidad);
+                console.log(response.status);
+                if (response.status == 200) {
+                    obtenerDatos()
+                }
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+        }
+
+        function enviar(info){
+            // console.log(info);
+            axios.post('http://192.168.1.100/impresiones/remote.php', info, { 
+            headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            "Access-Control-Allow-Origin": "*",
+            }} )
+            .then(function (response) {
+                console.log(response);
+            })
+        }
+
+
+        obtenerCantidad();
+
+
+
+
+
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('1d0f3961e3e3d11c0d2a', {
+        cluster: 'us2'
+    });
+
+    var channel = pusher.subscribe('impresion');
+    channel.bind('evento0', function(data) {
+        obtenerDatos();
+    });
+
+
+
+</script>
+  </body>
