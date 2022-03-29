@@ -6,8 +6,8 @@ class Documentos {
 
  public function Item($cant,  $name = '', $price = '', $total = '', $dollarSign = false)
     {
-        $rightCols = 8;
-        $leftCols = 38;
+        $rightCols = 10;
+        $leftCols = 40;
         if ($dollarSign) {
             $leftCols = $leftCols / 2 - $rightCols / 2;
         }
