@@ -20,7 +20,6 @@
         <div class="card text-center">
             <div class="card-body">
 
-
                 <div id="cargando">
                     <img src="https://www.lovexair.com/addons/default/themes/toucantechV3/img/loading_animation.gif" alt="">
                 </div>
@@ -29,7 +28,7 @@
                 <div id="idenesperando">
                     <div>
                         <h5 class="card-title">Esperando...</h5>
-                        <img src="https://flevix.com/wp-content/uploads/2019/12/256x256-1.svg" width="150" alt="">
+                        <img src="https://flevix.com/wp-content/uploads/2019/12/256x256-1.svg" width="120" alt="">
                         <!-- <img src="https://cdn.dribbble.com/users/2760451/screenshots/5783614/printer.gif" alt="">
                         <img src="https://hrmis.zalegoacademy.ac.ke/schoolstaff/public/images/print.gif" alt=""> -->
                     </div>
@@ -39,7 +38,7 @@
                 <div id="idenimprimiendo">
                     <div>
                         <h5 class="card-title">Imprimiendo</h5>
-                        <img src="https://hrmis.zalegoacademy.ac.ke/schoolstaff/public/images/print.gif" width="150" alt="">
+                        <img src="https://hrmis.zalegoacademy.ac.ke/schoolstaff/public/images/print.gif" width="120" alt="">
                     </div>
                     <a href="#" class="btn btn-danger">Espere</a>
                 </div>   
@@ -48,10 +47,12 @@
                 <div id="sindatos">
                     <div>
                         <h5 class="card-title">Sin datos</h5>
-                        <img src="https://rcportblair.rotaryindia.org/images/opps-error.png" alt="">
+                        <img src="https://rcportblair.rotaryindia.org/images/opps-error.png" width="120" alt="">
                         <p>No se encuentran impresiones pendientes</p>
                     </div>
                 </div> 
+
+                <small id="status"></small>
 
             </div>
           </div>
@@ -62,9 +63,9 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
-    <script src="configRemote.js"></script>
+    <script src="http://127.0.0.1/impresiones/configRemote.js"></script>
+
     <script>
-      
         function cargando(){
             $("#cargando").show();
             $("#idenimprimiendo").hide();
@@ -105,7 +106,7 @@
 
 
 
-        
+
 
 
 
@@ -128,7 +129,7 @@
         }
 
 
-        
+
         function enviar(info){
                 axios.post(url_local, info, { 
                 headers: {
@@ -160,23 +161,28 @@
                 console.log(error + "No hay datos pendientes en el servidor");
             })
         }
-        
+
         obtenerCantidad();
 
 
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
 
-    var pusher = new Pusher('1d0f3961e3e3d11c0d2a', {
+        var pusher = new Pusher('1d0f3961e3e3d11c0d2a', {
         cluster: 'us2'
-    });
+        });
 
-    var channel = pusher.subscribe('impresion' + url_td);
-    channel.bind('evento' + url_td, function(data) {
+        var channel = pusher.subscribe('impresion' + url_td);
+        channel.bind('evento' + url_td, function(data) {
         obtenerDatos();
-    });
+        });
 
 
+        /// pusher status
+        pusher.connection.bind('state_change', function(states) {
+        // states = {previous: 'oldState', current: 'newState'}
+        $('#status').text("This server is " + states.current);
+        });
 
-</script>
+    </script>
   </body>
