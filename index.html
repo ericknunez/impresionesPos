@@ -179,8 +179,8 @@
 
 
         /// pusher status
-        pusher.connection.bind('state_change', function(states) {
         // states = {previous: 'oldState', current: 'newState'}
+        pusher.connection.bind('state_change', function(states) {
         $('#status').text("This server is " + states.current);
         });
 
