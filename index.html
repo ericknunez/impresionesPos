@@ -113,7 +113,7 @@
 
 
         function obtenerDatos(){
-            axios.get(url_remote)
+            axios.get(url_remote + '/api/impresiones')
             .then(function (response) {
                 imprimiendo();
                 enviar(JSON.stringify(response.data));
@@ -131,7 +131,7 @@
 
 
         function enviar(info){
-                axios.post(url_local, info, { 
+                axios.post(url_local + '/impresiones/index.php', info, { 
                 headers: {
                 'Content-Type': 'application/json;charset=UTF-8',
                 "Access-Control-Allow-Origin": "*",
@@ -143,7 +143,7 @@
 
 
         async function obtenerCantidad(){
-            axios.get(url_remote + '/cantidad')
+            axios.get(url_remote + '/api/impresiones/cantidad')
             .then(function (response) {
                 console.log(response.status);
                 if (response.status == 200) {

@@ -175,17 +175,18 @@ public function Factura($data, $print){
   printer_draw_text($handle, "Tel: " . $data['empresa']['empresa_telefono'], 0, $oi);
   $oi=$oi+$n1;
   
-
-  printer_draw_text($handle, "Factura Numero: " . Helpers::NFactura($data['no_factura']), 0, $oi);
+  $numero1=str_pad($data['no_factura'], 8, "0", STR_PAD_LEFT);
+  $format="000-002-01-$numero1";
+  printer_draw_text($handle, "Factura Numero: " . $format, 0, $oi);
   
   
 
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Fact. Inicial: 000-001-01-00084001", 0, $oi);
+  printer_draw_text($handle, "Fact. Inicial: 000-002-01-00094001", 0, $oi);
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Fact. Final:  000-001-01-00094000", 0, $oi);
+  printer_draw_text($handle, "Fact. Final:  000-002-01-00104000", 0, $oi);
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Fecha Limite: 14-02-2022", 0, $oi);
+  printer_draw_text($handle, "Fecha Limite: 06-05-2023", 0, $oi);
   ////////////////
   ///
   
@@ -298,7 +299,7 @@ public function Factura($data, $print){
   printer_draw_text($handle, "CAI:", 0, $oi);
   $oi=$oi+$n1;
   
-  printer_draw_text($handle, "64961A-5770FD-FA4A99-877686-AAA537-00", 0, $oi);
+  printer_draw_text($handle, "8A0926-B2FBD6-0942AE-719B1B-0AE2A2-0D", 0, $oi);
   printer_delete_font($font);
   ///// termina cai
   

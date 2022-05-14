@@ -337,8 +337,8 @@ public function Factura($data, $print){
 
 
   if ($data['caja'] == 2) {
-    printer_write($handle, chr(27).chr(112).chr(48).chr(55).chr(121)); //enviar pulso
-  } 
+  printer_write($handle, chr(27).chr(112).chr(48).chr(55).chr(121)); //enviar pulso
+  }
 
 
 
