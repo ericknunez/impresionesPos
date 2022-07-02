@@ -72,7 +72,7 @@ public function CorteZ($data){
 public function ReporteDiario($data){
     $doc = new CorteDeCaja();
     if ($data['caja'] == 1) {
-        $printer = "EPSON TM-U220 Receipt";   
+        $printer = "FACTURAS1";   
       } 
     if ($data['caja'] == 2) {
         $printer = "FACTURAS2"; 

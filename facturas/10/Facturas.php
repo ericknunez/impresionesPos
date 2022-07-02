@@ -36,7 +36,7 @@ public function ImprimirFactura($data){
     }
     if ($data['documento_factura'] == 2) {
           if ($data['caja'] == 1) {
-            $printer = "EPSON TM-U220 Receipt"; 
+            $printer = "FACTURAS1"; 
             $printer_ticket = "TICKET1";   
           } 
           if ($data['caja'] == 2) {
