@@ -6,25 +6,47 @@ use Mike42\Escpos\Printer;
 
 
 
-class Precuenta {
+class Facturas {
 
 
 /*
-    Precuenta del ciente
+0 Ninguno
+1 Ticket
+2 Facturas
+3 CCF
+4 NS
 */
 
+public function ImprimirFactura($data){
+    // $data['documento_factura'] = 0; // maneja el tipo de documento a imprimir
+    $printer = "LR2000";
+    if ($data['documento_factura'] == 0) {
+        $this->Ninguno();
+    }
+    if ($data['documento_factura'] == 1) {
+        $this->Ticket($data, $printer);
+    }
+    if ($data['documento_factura'] == 2) {
+        $this->Factura();
+    }
+}
 
-public function PrecuentaPrint($data, $printer){
+
+public function Ninguno(){
+  $this->AbreCaja();
+}
+
+
+
+public function Ticket($data, $printer){
     $doc = new Documentos();
     
-    $img  = "C:/laragon/www/impresiones/facturas/112/img/logo.jpg";
+    $img  = "C:/laragon/www/impresiones/facturas/103/img/villanapoli.jpg";
   
   $connector = new WindowsPrintConnector($printer);
   $printer = new Printer($connector);
   $printer -> initialize();
   
-  $printer->pulse();
-
   $printer -> setFont(Printer::FONT_B);
   
   $printer -> setTextSize(1, 2);
@@ -34,25 +56,19 @@ public function PrecuentaPrint($data, $printer){
   $printer -> setJustification(Printer::JUSTIFY_CENTER);
   $logo = EscposImage::load($img, false);
   $printer->bitImage($logo);
-  $printer -> setJustification(Printer::JUSTIFY_CENTER);
+  $printer -> setJustification(Printer::JUSTIFY_LEFT);
 //   $printer->text($data['empresa_nombre']);
   
-$printer->text("Plaza constitucion local # 16 fte. a");
-$printer->feed();
-
-$printer->text("Parque central de Metapan");
-$printer->feed();
-
-$printer -> setJustification(Printer::JUSTIFY_LEFT);
-$printer->text("Tel: 7674-2249");
-$printer->feed();
-
+  $printer->text("Calle a San Salvador Colonia El Mora poste 337 Santa Ana");
+  // $printer->text($data['empresa_direccion']);
   
-  $printer->text("ORDEN NUMERO: " . $data['numero_documento']);
   $printer->feed();
-  $printer -> text($doc->DosCol($data['fecha'], 0, $data['hora'], 10));
+  $printer->text("TELEFONO: 7985-6021");
+  // $printer->text("TELEFONO: " . $data['empresa_telefono']);
   
-  $printer->text("PRECUENTA");
+  $printer->feed();
+  $printer->text("TICKET NUMERO: " . $data['no_factura']);
+
   
   
   /* Stuff around with left margin */
@@ -71,7 +87,7 @@ $printer->feed();
   
 
   foreach ($data['productos'] as $producto) {
-    $printer -> text($doc->Item($producto['cant'], $producto["producto"], Helpers::Format($producto["pv"]), Helpers::Format($producto["total"]))); 
+        $printer -> text($doc->Item($producto['cant'], $producto["producto"], Helpers::Format($producto["pv"]), Helpers::Format($producto["total"]))); 
   }
   
    
@@ -93,16 +109,40 @@ $printer->feed();
   $printer -> setEmphasis(false);
   
   
+  
   $printer -> text("________________________________________________________");
   $printer->feed();
   
+
+    $printer -> text($doc->DosCol("Efectivo " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['efectivo']), 10));
+    $printer -> text($doc->DosCol("Cambio " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['cambio']), 10));
+    
+    
+    $printer -> text("________________________________________________________");
+    $printer->feed();
+  
+    
+
   
   
+  $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 20));
   
   
   $printer -> text("Cajero: " . $data['cajero']);
   $printer->feed();
   
+if($data['tipo_pago'] == 1){
+    $printer -> text("Pago: Efectivo");
+    $printer->feed();
+  }
+  if($data['tipo_pago'] == 2){
+    $printer -> text("Pago: Tarjeta");
+    $printer->feed();
+  }
+  if($data['tipo_pago'] == 3){
+    $printer -> text("Pago: Bitcoin");
+    $printer->feed();
+  }
 
   if($data['cliente_nombre'] != NULL){
     $printer -> text("Cliente: " . $data['cliente_nombre']);
@@ -121,11 +161,10 @@ $printer->feed();
   
   
   // nombre de mesa
-  if($data['mesa']['nombre_mesa'] != NULL){
+   if($data['mesa']['nombre_mesa'] != NULL){
     $printer -> text("Mesa: " . $data['mesa']['nombre_mesa']);
     $printer->feed();
   }
-  
   
 // llevar o comer aqui
 if($data['llevar_aqui'] != NULL){
@@ -153,16 +192,27 @@ if($data['llevar_aqui'] != NULL){
   
   $printer->feed();
   $printer->cut();
+  $printer->pulse();  
   $printer->close();
   
 
 }
 
 
+public function Factura(){
+  $this->AbreCaja();
+}
 
 
 
+public function AbreCaja($datos){
+  $printer = "LR2OOO";
 
+  $connector = new WindowsPrintConnector($printer);
+  $printer = new Printer($connector);
+  $printer->pulse();
+  $printer->close();
+}
 
 
 
