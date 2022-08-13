@@ -17,14 +17,12 @@ class Precuenta {
 public function PrecuentaPrint($data, $printer){
     $doc = new Documentos();
     
-    $img  = "C:/laragon/www/impresiones/facturas/112/img/logo.jpg";
+    $img  = "C:/laragon/www/impresiones/facturas/103/img/villanapoli.jpg";
   
   $connector = new WindowsPrintConnector($printer);
   $printer = new Printer($connector);
   $printer -> initialize();
   
-  $printer->pulse();
-
   $printer -> setFont(Printer::FONT_B);
   
   $printer -> setTextSize(1, 2);
@@ -34,24 +32,21 @@ public function PrecuentaPrint($data, $printer){
   $printer -> setJustification(Printer::JUSTIFY_CENTER);
   $logo = EscposImage::load($img, false);
   $printer->bitImage($logo);
-  $printer -> setJustification(Printer::JUSTIFY_CENTER);
+  $printer -> setJustification(Printer::JUSTIFY_LEFT);
 //   $printer->text($data['empresa_nombre']);
   
-$printer->text("Plaza constitucion local # 16 fte. a");
-$printer->feed();
+$printer->text("Calle a San Salvador Colonia El Mora poste 337, Santa Ana");
+// $printer->text($data['empresa_direccion']);
 
-$printer->text("Parque central de Metapan");
 $printer->feed();
-
-$printer -> setJustification(Printer::JUSTIFY_LEFT);
-$printer->text("Tel: 7674-2249");
-$printer->feed();
-
+$printer->text("TELEFONO: 7985-6021");
+// $printer->text("TELEFONO: " . $data['empresa_telefono']);
   
-  $printer->text("ORDEN NUMERO: " . $data['numero_documento']);
   $printer->feed();
-  $printer -> text($doc->DosCol($data['fecha'], 0, $data['hora'], 10));
+  $printer->text("ORDEN NUMERO: " . $data['numero_documento']);
   
+  
+  $printer->feed();
   $printer->text("PRECUENTA");
   
   
@@ -98,6 +93,7 @@ $printer->feed();
   
   
   
+  $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 20));
   
   
   $printer -> text("Cajero: " . $data['cajero']);
@@ -125,7 +121,6 @@ $printer->feed();
     $printer -> text("Mesa: " . $data['mesa']['nombre_mesa']);
     $printer->feed();
   }
-  
   
 // llevar o comer aqui
 if($data['llevar_aqui'] != NULL){
