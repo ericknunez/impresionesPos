@@ -19,15 +19,16 @@ class Facturas {
 
 public function ImprimirFactura($data){
     // $data['documento_factura'] = 0; // maneja el tipo de documento a imprimir
-    $printer = "TICKET";
-    if ($data['documento_factura'] == 0) {
+     if ($data['documento_factura'] == 0) {
         $this->Ninguno();
     }
     if ($data['documento_factura'] == 1) {
-        $this->Ticket($data, $printer);
-    }
-    if ($data['documento_factura'] == 2) {
-        // $this->Factura();
+        if ($data['caja'] == 1) {
+          $printer = "TICKET";   
+        } 
+        if ($data['caja'] == 2) {
+            $printer = "BAR"; 
+        } 
         $this->Ticket($data, $printer);
     }
 }
