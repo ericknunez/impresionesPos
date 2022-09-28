@@ -25,7 +25,7 @@ public function ImprimirComanda($data){
     }
 
     if ($data['panel'] == 2) {
-      $printer = "TICKET";
+      $printer = "BAR";
       $panel = "BAR";
       if ($data['tipo_impresion'] == 2) {
           $this->Comanda($data, $printer, $panel);

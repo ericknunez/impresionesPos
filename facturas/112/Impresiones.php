@@ -11,7 +11,14 @@ public function Factura($data){
 // Solo peara la precuenta del cliente en termico
 public function PreCuenta($data){
     $doc = new Precuenta();
-    $printer = "TICKET";
+    if ($data['caja'] == 1) {
+        $printer = "TICKET";   
+      } 
+    if ($data['caja'] == 2) {
+        $printer = "BAR"; 
+    } else {
+        $printer = "TICKET"; 
+    }
     $doc->PrecuentaPrint($data, $printer);
 }
 
@@ -37,20 +44,41 @@ public function AbrirCaja($data){
 // Corte de Cja
 public function Corte($data){
     $doc = new CorteDeCaja();
-    $printer = "TICKET";
+    if ($data['caja'] == 1) {
+        $printer = "TICKET";   
+      } 
+    if ($data['caja'] == 2) {
+        $printer = "BAR"; 
+    } else {
+        $printer = "TICKET"; 
+    }
     $doc->CortePrint($data, $printer);
 }
 
 public function CorteZ($data){
     $doc = new CorteDeCaja();
-    $printer = "TICKET";
+      if ($data['caja'] == 1) {
+        $printer = "TICKET";   
+      } 
+    if ($data['caja'] == 2) {
+        $printer = "BAR"; 
+    } else {
+        $printer = "TICKET"; 
+    }
     $doc->CorteZ($data, $printer);
 }
 
 // Reporte
 public function ReporteDiario($data){
     $doc = new CorteDeCaja();
-    $printer = "TICKET";
+    if ($data['caja'] == 1) {
+        $printer = "TICKET";   
+      } 
+    if ($data['caja'] == 2) {
+        $printer = "BAR"; 
+    } else {
+        $printer = "TICKET"; 
+    }
     $doc->ReporteDiario($data, $printer);
 }
 
