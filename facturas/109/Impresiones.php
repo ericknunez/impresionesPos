@@ -6,12 +6,13 @@ class Impresiones {
 public function Factura($data){
     $doc = new Facturas();
     $doc->ImprimirFactura($data);
+	$doc->ImprimirFactura($data);
 }
 
 // Solo peara la precuenta del cliente en termico
 public function PreCuenta($data){
     $doc = new Precuenta();
-    $printer = "CAJA";
+    $printer = "LR2000";
     $doc->PrecuentaPrint($data, $printer);
 }
 
@@ -43,17 +44,15 @@ public function Corte($data){
 
 public function CorteZ($data){
     $doc = new CorteDeCaja();
-    $printer = "IMPRESORA";
+    $printer = "LR2000";
     $doc->CorteZ($data, $printer);
 }
 
 // Reporte
 public function ReporteDiario($data){
     $doc = new CorteDeCaja();
-    $printer = "IMPRESORA";
+    $printer = "LR2000";
     $doc->ReporteDiario($data, $printer);
 }
-
-
 
 }// class
