@@ -160,13 +160,17 @@ public function Factura($data, $print){
   $oi=$oi+$n1;
   printer_draw_text($handle, "Mercado Concepcion, 1/2 cdra al sur", 0, $oi);
   $oi=$oi+$n1;
-  printer_draw_text($handle, "de farmacia San Jose, Choluteca, Honduras.", 0, $oi);
+  printer_draw_text($handle, "de farmacia San Jose, Choluteca,", 0, $oi);
+  $oi=$oi+$n1;
+  printer_draw_text($handle, "Honduras.", 0, $oi);
   
   //printer_draw_text($handle, $_SESSION['config_direccion'], 0, $oi);
   // $oi=$oi+$n1;
   // printer_draw_text($handle, Helpers::Pais($_SESSION['config_pais']), 0, $oi);
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Propietario: " .$data['empresa']['empresa_propietario'], 0, $oi);
+  printer_draw_text($handle, "Propietario: Oscar Alexander", 0, $oi);
+  $oi=$oi+$n1;
+  printer_draw_text($handle, "             Osorio Ramirez", 0, $oi);
   $oi=$oi+$n1;
   printer_draw_text($handle, "Email: " . $data['empresa']['empresa_email'], 0, $oi);
   $oi=$oi+$n1;
