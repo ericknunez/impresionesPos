@@ -194,6 +194,11 @@ public function Factura($data, $print){
   ////////////////
   ///
   
+  $oi=$oi+$n3;
+  printer_draw_text($handle, "Cliente: XXXXXX XXXXXXXXX", 0, $oi); 
+  $oi=$oi+$n1;
+  printer_draw_text($handle, "RTN: 000000000000000", 0, $oi);     
+
 
   /// nuevos datos exonerados
   $oi=$oi+$n1;
