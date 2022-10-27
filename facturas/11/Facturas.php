@@ -247,7 +247,33 @@ public function Factura($data, $print){
   printer_draw_text($handle, "Sub Total " . $data['tipo_moneda'] . ":", 185, $oi);
   printer_draw_text($handle, Helpers::Format($data['subtotal']), 320, $oi);
   
+    
+  $oi=$oi+$n1;
+  printer_draw_text($handle, "Descuentos y Rebajas. ", 100, $oi);
+  printer_draw_text($handle, Helpers::Format(0), 320, $oi);
   
+  
+  $oi=$oi+$n1;
+  printer_draw_text($handle, "Imp. Exonerado. ", 115, $oi);
+  printer_draw_text($handle, Helpers::Format(0), 320, $oi);
+  
+  
+
+  $oi=$oi+$n1;
+  printer_draw_text($handle, "Imp. Exento. ", 165, $oi);
+  printer_draw_text($handle, Helpers::Format(0), 320, $oi);
+  
+  
+  $oi=$oi+$n1;
+  printer_draw_text($handle, "Gravado 15%. ", 165, $oi);
+  printer_draw_text($handle, Helpers::Format(0), 320, $oi);
+  
+
+  $oi=$oi+$n1;
+  printer_draw_text($handle, "Gravado 18%. ", 165, $oi);
+  printer_draw_text($handle, Helpers::Format(0), 320, $oi);
+  
+
   $oi=$oi+$n1;
   printer_draw_text($handle, "15% Impu. " . $data['tipo_moneda'] . ":", 175, $oi);
   printer_draw_text($handle, Helpers::Format($data['impuestos']), 320, $oi);
@@ -257,12 +283,7 @@ public function Factura($data, $print){
   printer_draw_text($handle, "18% Impu. ", 175, $oi);
   printer_draw_text($handle, Helpers::Format(0), 320, $oi);
   
-  
-  $oi=$oi+$n1;
-  printer_draw_text($handle, "Descuentos y Rebajas. ", 100, $oi);
-  printer_draw_text($handle, Helpers::Format(0), 320, $oi);
-  
-  
+
   
   $oi=$oi+$n1;
   printer_draw_text($handle, "Total " . $data['tipo_moneda'] . ":", 232, $oi);
