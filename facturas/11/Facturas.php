@@ -180,20 +180,26 @@ public function Factura($data, $print){
   $oi=$oi+$n1;
   
   $numero1=str_pad(0, 8, "0", STR_PAD_LEFT);
-  $format="000-002-01-$numero1";
+  $format="000-001-01-$numero1";
   printer_draw_text($handle, "Factura Numero: " . $format, 0, $oi);
   
   
 
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Fact. Inicial: 000-002-01-00000000", 0, $oi);
+  printer_draw_text($handle, "Fact. Inicial: 000-001-01-00000001", 0, $oi);
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Fact. Final:  000-002-01-00000000", 0, $oi);
+  printer_draw_text($handle, "Fact. Final:  000-001-01-00020000", 0, $oi);
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Fecha Limite: 00-00-0000", 0, $oi);
+  printer_draw_text($handle, "Fecha Limite: 28-04-2023", 0, $oi);
   ////////////////
   ///
   
+  if ($data['cliente']['cliente']) {
+    $oi=$oi+$n3;
+    printer_draw_text($handle, "Cliente: " . $data['cliente']['cliente'], 0, $oi); 
+    $oi=$oi+$n1;
+    printer_draw_text($handle, "RTN: " . $data['cliente']['documento'], 0, $oi);     
+  }
 
   /// nuevos datos exonerados
   $oi=$oi+$n1;
@@ -303,7 +309,7 @@ public function Factura($data, $print){
   printer_draw_text($handle, "CAI:", 0, $oi);
   $oi=$oi+$n1;
   
-  printer_draw_text($handle, "8A0926-B2FBD6-0942AE-719B1B-0AE2A2-0D", 0, $oi);
+  printer_draw_text($handle, "9577EE-F75074-C04EAE-F1AD2C-EDC1E2-E8", 0, $oi);
   printer_delete_font($font);
   ///// termina cai
   
