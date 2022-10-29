@@ -200,7 +200,7 @@ public function Factura($data, $print){
     $oi=$oi+$n1;
     printer_draw_text($handle, "RTN: " . $data['cliente']['documento'], 0, $oi);     
   }
-
+  
   /// nuevos datos exonerados
   $oi=$oi+$n1;
   printer_draw_text($handle, "Datos del Adquiriente Exonerado:", 0, $oi);
