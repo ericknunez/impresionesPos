@@ -1,5 +1,6 @@
 <?php
 header('Access-Control-Allow-Origin: *');
+date_default_timezone_set('America/El_Salvador');
 include_once 'common/Dinero.php';
 include_once 'common/Fechas.php';
 include_once 'common/Helpers.php';

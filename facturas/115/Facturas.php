@@ -96,7 +96,6 @@ $printer->feed();
         $printer -> text($doc->Item($producto['cant'], $producto["producto"], Helpers::Format($producto["pv"]), Helpers::Format($producto["total"]))); 
   }
   
-   
   $printer -> text("________________________________________________________");
   $printer->feed();
   
