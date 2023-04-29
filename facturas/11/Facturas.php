@@ -184,11 +184,11 @@ public function Factura($data, $print){
   
 
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Fact. Inicial: 000-001-01-00000001", 0, $oi);
+  printer_draw_text($handle, "Fact. Inicial: 000-001-01-00020001", 0, $oi);
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Fact. Final:  000-001-01-00020000", 0, $oi);
+  printer_draw_text($handle, "Fact. Final:  000-001-01-00032000", 0, $oi);
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Fecha Limite: 28-04-2023", 0, $oi);
+  printer_draw_text($handle, "Fecha Limite: 29-04-2024", 0, $oi);
   ////////////////
   ///
   
@@ -307,7 +307,7 @@ public function Factura($data, $print){
   printer_draw_text($handle, "CAI:", 0, $oi);
   $oi=$oi+$n1;
   
-  printer_draw_text($handle, "9577EE-F75074-C04EAE-F1AD2C-EDC1E2-E8", 0, $oi);
+  printer_draw_text($handle, "CDE043-1BE689-DB498F-809B27-AA53A6-21", 0, $oi);
   printer_delete_font($font);
   ///// termina cai
   
