@@ -24,15 +24,19 @@ public function ImprimirFactura($data){
     }
     if ($data['documento_factura'] == 1) {
         if ($data['caja'] == 1) {
-          $printer = "TICKET1";   
+          $printer = "TICKET1"; 
+          $lineSpace = 75;  
         } 
         if ($data['caja'] == 2) {
-            $printer = "TICKET2"; 
+          $printer = "TICKET2";
+          $lineSpace = 15;  
+
         } 
         if ($data['caja'] == 3) {
-          $printer = "TICKET2"; 
+          $printer = "TICKET2";
+          $lineSpace = 15;  
         } 
-        $this->Ticket($data, $printer);
+        $this->Ticket($data, $printer, $lineSpace);
     }
     if ($data['documento_factura'] == 2) {
           if ($data['caja'] == 1) {
@@ -61,18 +65,14 @@ public function Ninguno(){
 
 
 
-public function Ticket($data, $print){
+public function Ticket($data, $print, $lineSpace){
   $doc = new Documentos();
 
   $img  = "C:/Appserv/www/impresiones/facturas/10/img/sp.jpg";
 
-
   $connector = new WindowsPrintConnector($print);
   $printer = new Printer($connector);
   $printer -> initialize();
-
-
-
 
   $printer -> setJustification(Printer::JUSTIFY_CENTER);
   $logo = EscposImage::load($img, false);
@@ -83,12 +83,10 @@ public function Ticket($data, $print){
   // $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
 
   $printer -> setTextSize(1, 2);
-  $printer -> setLineSpacing(75);
-
+  $printer -> setLineSpacing($lineSpace);
 
   $printer -> setJustification(Printer::JUSTIFY_CENTER);
   $printer->text("ORDEN DE COMPRA");
-
 
   /* Stuff around with left margin */
   $printer -> setJustification(Printer::JUSTIFY_LEFT);
@@ -101,27 +99,13 @@ public function Ticket($data, $print){
 
   } 
 
-
-
-
   $printer->feed();
-
-
   $printer -> text($doc->DosCol("Total " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['total']), 20));
-
-
   $printer -> text($doc->DosCol("Efectivo " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['efectivo']), 20));
-
   //cambio
   $printer -> text($doc->DosCol("Cambio " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['cambio']), 20));
-
-
   $printer->feed();
-
-
-
   $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 30));
-
 
   $printer->feed();
   $printer -> text("Cajero: " . $data['cajero']);
@@ -130,9 +114,6 @@ public function Ticket($data, $print){
   $printer->text("REF: " . $data['no_factura']);
   $printer -> setJustification();
 
-
-
-
   $printer->feed();
   $printer->cut();
   $printer->pulse();
@@ -140,7 +121,6 @@ public function Ticket($data, $print){
 
 
 }
-
 
 
 
@@ -200,11 +180,11 @@ public function Factura($data, $print){
   
 
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Fact. Inicial: 000-001-01-00850001", 0, $oi);
+  printer_draw_text($handle, "Fact. Inicial: 000-001-01-00930001", 0, $oi);
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Fact. Final:  000-001-01-00930000", 0, $oi);
+  printer_draw_text($handle, "Fact. Final:  000-001-01-01010000", 0, $oi);
   $oi=$oi+$n1;
-  printer_draw_text($handle, "Fecha Limite: 14-02-2023", 0, $oi);
+  printer_draw_text($handle, "Fecha Limite: 06-01-2024", 0, $oi);
 
   
   if ($data['cliente']['cliente']) {
@@ -316,7 +296,7 @@ public function Factura($data, $print){
   printer_draw_text($handle, "CAI:", 0, $oi);
   $oi=$oi+$n1;
   
-  printer_draw_text($handle, "F03617-B755D9-324EBB-DEB1EC-FFEB6B-E7", 0, $oi);
+  printer_draw_text($handle, "7D4E35-C30CFD-564D93-9FF7E4-A3F2A5-68", 0, $oi);
   printer_delete_font($font);
 
   
