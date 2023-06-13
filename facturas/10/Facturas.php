@@ -55,15 +55,15 @@ public function ImprimirFactura($data){
               $printer = "FACTURAS2"; 
               $printer_ticket = "TICKET2"; 
               $lineSpace = 15;  
-          $colSpanOne = 40;
-          $colSpanTwo = 20;  
+            $colSpanOne = 40;
+            $colSpanTwo = 20;  
           } 
           if ($data['caja'] == 3) {
             $printer = "FACTURAS2"; 
             $printer_ticket = "TICKET2"; 
             $lineSpace = 15;  
-          $colSpanOne = 40;
-          $colSpanTwo = 20;  
+            $colSpanOne = 40;
+            $colSpanTwo = 20;  
           } 
         if (!$data['reimprimir']) {
           $this->Ticket($data, $printer_ticket, $lineSpace, $colSpanOne, $colSpanTwo);
