@@ -26,20 +26,20 @@ public function ImprimirFactura($data){
         if ($data['caja'] == 1) {
           $printer = "TICKET1"; 
           $lineSpace = 75;
-          $colSpanOne = 38;
-          $colSpanTwo = 15;  
+          $colSpanOne = 40;
+          $colSpanTwo = 20;  
         } 
         if ($data['caja'] == 2) {
           $printer = "TICKET2";
           $lineSpace = 15;  
-          $colSpanOne = 40;
-          $colSpanTwo = 20;  
+          $colSpanOne = 38;
+          $colSpanTwo = 15;  
         } 
         if ($data['caja'] == 3) {
           $printer = "TICKET2";
           $lineSpace = 15;  
-          $colSpanOne = 40;
-          $colSpanTwo = 20;  
+          $colSpanOne = 38;
+          $colSpanTwo = 15;  
         } 
         $this->Ticket($data, $printer, $lineSpace, $colSpanOne, $colSpanTwo);
     }
@@ -48,22 +48,22 @@ public function ImprimirFactura($data){
             $printer = "FACTURAS1"; 
             $printer_ticket = "TICKET1"; 
             $lineSpace = 75;
-            $colSpanOne = 38;
-            $colSpanTwo = 15;    
+            $colSpanOne = 40;
+            $colSpanTwo = 20;    
           } 
           if ($data['caja'] == 2) {
               $printer = "FACTURAS2"; 
               $printer_ticket = "TICKET2"; 
               $lineSpace = 15;  
-            $colSpanOne = 40;
-            $colSpanTwo = 20;  
+              $colSpanOne = 38;
+              $colSpanTwo = 15;  
           } 
           if ($data['caja'] == 3) {
             $printer = "FACTURAS2"; 
             $printer_ticket = "TICKET2"; 
             $lineSpace = 15;  
-            $colSpanOne = 40;
-            $colSpanTwo = 20;  
+            $colSpanOne = 38;
+            $colSpanTwo = 15;  
           } 
         if (!$data['reimprimir']) {
           $this->Ticket($data, $printer_ticket, $lineSpace, $colSpanOne, $colSpanTwo);
