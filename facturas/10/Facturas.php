@@ -45,11 +45,11 @@ public function ImprimirFactura($data){
     }
     if ($data['documento_factura'] == 2) {
           if ($data['caja'] == 1) {
-            $printer = "FACTURAS1"; 
-            $printer_ticket = "TICKET1"; 
-            $lineSpace = 75;
-            $colSpanOne = 40;
-            $colSpanTwo = 20;    
+              $printer = "FACTURAS1"; 
+              $printer_ticket = "TICKET1"; 
+              $lineSpace = 75;
+              $colSpanOne = 40;
+              $colSpanTwo = 20;    
           } 
           if ($data['caja'] == 2) {
               $printer = "FACTURAS2"; 
@@ -59,11 +59,11 @@ public function ImprimirFactura($data){
               $colSpanTwo = 15;  
           } 
           if ($data['caja'] == 3) {
-            $printer = "FACTURAS2"; 
-            $printer_ticket = "TICKET2"; 
-            $lineSpace = 15;  
-            $colSpanOne = 38;
-            $colSpanTwo = 15;  
+              $printer = "FACTURAS2"; 
+              $printer_ticket = "TICKET2"; 
+              $lineSpace = 15;  
+              $colSpanOne = 38;
+              $colSpanTwo = 15;  
           } 
         if (!$data['reimprimir']) {
           $this->Ticket($data, $printer_ticket, $lineSpace, $colSpanOne, $colSpanTwo);
