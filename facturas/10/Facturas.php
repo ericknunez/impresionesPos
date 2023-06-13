@@ -25,34 +25,48 @@ public function ImprimirFactura($data){
     if ($data['documento_factura'] == 1) {
         if ($data['caja'] == 1) {
           $printer = "TICKET1"; 
-          $lineSpace = 75;  
+          $lineSpace = 75;
+          $colSpanOne = 38;
+          $colSpanTwo = 15;  
         } 
         if ($data['caja'] == 2) {
           $printer = "TICKET2";
           $lineSpace = 15;  
-
+          $colSpanOne = 40;
+          $colSpanTwo = 20;  
         } 
         if ($data['caja'] == 3) {
           $printer = "TICKET2";
           $lineSpace = 15;  
+          $colSpanOne = 40;
+          $colSpanTwo = 20;  
         } 
-        $this->Ticket($data, $printer, $lineSpace);
+        $this->Ticket($data, $printer, $lineSpace, $colSpanOne, $colSpanTwo);
     }
     if ($data['documento_factura'] == 2) {
           if ($data['caja'] == 1) {
             $printer = "FACTURAS1"; 
-            $printer_ticket = "TICKET1";   
+            $printer_ticket = "TICKET1"; 
+            $lineSpace = 75;
+            $colSpanOne = 38;
+            $colSpanTwo = 15;    
           } 
           if ($data['caja'] == 2) {
               $printer = "FACTURAS2"; 
               $printer_ticket = "TICKET2"; 
+              $lineSpace = 15;  
+          $colSpanOne = 40;
+          $colSpanTwo = 20;  
           } 
           if ($data['caja'] == 3) {
             $printer = "FACTURAS2"; 
             $printer_ticket = "TICKET2"; 
+            $lineSpace = 15;  
+          $colSpanOne = 40;
+          $colSpanTwo = 20;  
           } 
         if (!$data['reimprimir']) {
-          $this->Ticket($data, $printer_ticket);
+          $this->Ticket($data, $printer_ticket, $lineSpace, $colSpanOne, $colSpanTwo);
         }
         $this->Factura($data, $printer);
     }
@@ -65,7 +79,7 @@ public function Ninguno(){
 
 
 
-public function Ticket($data, $print, $lineSpace){
+public function Ticket($data, $print, $lineSpace, $colSpanOne, $colSpanTwo){
   $doc = new Documentos();
 
   $img  = "C:/Appserv/www/impresiones/facturas/10/img/sp.jpg";
@@ -100,12 +114,12 @@ public function Ticket($data, $print, $lineSpace){
   } 
 
   $printer->feed();
-  $printer -> text($doc->DosCol("Total " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['total']), 20));
-  $printer -> text($doc->DosCol("Efectivo " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['efectivo']), 20));
+  $printer -> text($doc->DosCol("Total " . $data['tipo_moneda'] . ":", $colSpanOne, Helpers::Format($data['total']), $colSpanTwo));
+  $printer -> text($doc->DosCol("Efectivo " . $data['tipo_moneda'] . ":", $colSpanOne, Helpers::Format($data['efectivo']), $colSpanTwo));
   //cambio
-  $printer -> text($doc->DosCol("Cambio " . $data['tipo_moneda'] . ":", 40, Helpers::Format($data['cambio']), 20));
+  $printer -> text($doc->DosCol("Cambio " . $data['tipo_moneda'] . ":", $colSpanOne, Helpers::Format($data['cambio']), $colSpanTwo));
   $printer->feed();
-  $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 30));
+  $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 20));
 
   $printer->feed();
   $printer -> text("Cajero: " . $data['cajero']);
