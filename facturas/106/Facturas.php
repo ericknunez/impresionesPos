@@ -63,9 +63,9 @@ public function Ticket($data, $printer){
 //   $printer->text($data['empresa_nombre']);
   
   $printer->feed();
-  $printer->text("CARRETERA INTERNACIONAL KM 95");
+  $printer->text("CALLE MERCEDES CACERES PONIENTE");
   $printer->feed();
-  $printer->text("HACIENDA SAN FRANCISCO GUAJOYO");
+  $printer->text("JUAYUA, SONSONATE");
   // $printer->text($data['empresa_direccion']);
   
   $printer->feed();
