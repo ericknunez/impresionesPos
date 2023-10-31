@@ -40,7 +40,7 @@ public function PrecuentaPrint($data, $printer){
 $printer->text("PANITOS CRIOLLOS");
 $printer->feed();
   
-$printer->text("Barrio Mejicanos Av. Morazan 6-4, Sonsonate");
+$printer->text("COL. BELÉN PASAJE 1 #4-36 ENTRE 26 Y 28 AVE. NORTE, SONSONATE");
 $printer->feed();
 
 
