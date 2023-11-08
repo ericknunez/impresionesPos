@@ -14,7 +14,7 @@ public function ImprimirComanda($data){
     // $data['panel'] = 0; // maneja el tipo de panel a imprimir
 
     if ($data['panel'] == 1) {
-        $printer = "TICKET";
+        $printer = "COCINA";
         $panel = "COCINA";
         if ($data['tipo_impresion'] == 2) {
             $this->Comanda($data, $printer, $panel);
@@ -24,9 +24,9 @@ public function ImprimirComanda($data){
         }
     }
 
-    if ($data['panel'] == 2) {
-      $printer = "LR2000";
-      $panel = "BAR";
+    if ($data['panel'] == 1) {
+        $printer = "TICKET";
+      $panel = "COCINA";
       if ($data['tipo_impresion'] == 2) {
           $this->Comanda($data, $printer, $panel);
           // $this->Comanda($data, $printer);
@@ -105,8 +105,8 @@ if($data['mesa']['nombre_mesa'] != NULL){
   $printer->feed();
 }
 
-if($data['mesa']['comentarios'] != NULL){
-  $printer -> text("Mesa: " . $data['mesa']['comentarios']);
+if($data['mesa']['comentario'] != NULL){
+  $printer -> text("Comentario: " . $data['mesa']['comentario']);
   $printer->feed();
 }
 
@@ -214,8 +214,8 @@ if($data['mesa']['nombre_mesa'] != NULL){
   $printer->feed();
 }
 
-if($data['mesa']['comentarios'] != NULL){
-  $printer -> text("Mesa: " . $data['mesa']['comentarios']);
+if($data['mesa']['comentario'] != NULL){
+  $printer -> text("Comentario: " . $data['mesa']['comentario']);
   $printer->feed();
 }
 

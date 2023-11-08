@@ -21,11 +21,11 @@ public function ImprimirFactura($data){
     // $data['documento_factura'] = 0; // maneja el tipo de documento a imprimir
 
     if ($data['documento_factura'] == 0) {
-        $printer = "EOM-200";
+        $printer = "EOM-POS";
         $this->Ninguno();
     }
     if ($data['documento_factura'] == 1) {
-        $printer = "EOM-200";
+        $printer = "EOM-POS";
         $this->Ticket($data, $printer);
     }
     if ($data['documento_factura'] == 2) {
@@ -63,9 +63,10 @@ public function Ticket($data, $printer){
  // $printer->bitImage($logo);
   $printer -> setJustification(Printer::JUSTIFY_CENTER);
 //   $printer->text($data['empresa_nombre']);
+  $printer->feed(2);
   $printer->text("DELI-PIZZA");
   $printer->feed();
-  $printer->text("Dirección Barrio el Centro, avenida las flores");
+  $printer->text("Dirección: Barrio el Centro");
   $printer->feed();
 
   $printer->text("Nueva Esparta, La Unión ");
@@ -159,7 +160,7 @@ public function Ticket($data, $printer){
   
   // nombre de mesa
   if($data['mesa']['nombre_mesa'] != NULL){
-    $printer -> text("Mesa: " . $data['mesa']['nombre_mesa']);
+    $printer -> text(" " . $data['mesa']['nombre_mesa']);
     $printer->feed();
   }
   
@@ -184,6 +185,8 @@ if($data['llevar_aqui'] != NULL){
   $printer->feed();
   $printer -> setJustification(Printer::JUSTIFY_CENTER);
   $printer -> text("GRACIAS POR SU PREFERENCIA...");
+  $printer->feed();
+  $printer->feed();
   $printer -> setJustification();
   
   

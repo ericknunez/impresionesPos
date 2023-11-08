@@ -34,10 +34,10 @@ public function PrecuentaPrint($data, $printer){
  // $printer->bitImage($logo);
   $printer -> setJustification(Printer::JUSTIFY_CENTER);
 //   $printer->text($data['empresa_nombre']);
-  
-$printer->text("DELI-PIZZA");
+  $printer->feed(2);
+  $printer->text("DELI-PIZZA");
   $printer->feed();
-  $printer->text("Dirección Barrio el Centro, avenida las flores");
+  $printer->text("Dirección: Barrio el Centro");
   $printer->feed();
 
   $printer->text("Nueva Esparta, La Unión ");
@@ -122,7 +122,7 @@ $printer->text("DELI-PIZZA");
   
   // nombre de mesa
   if($data['mesa']['nombre_mesa'] != NULL){
-    $printer -> text("Mesa: " . $data['mesa']['nombre_mesa']);
+    $printer -> text(" " . $data['mesa']['nombre_mesa']);
     $printer->feed();
   }
   
@@ -148,6 +148,8 @@ if($data['llevar_aqui'] != NULL){
   $printer->feed();
   $printer -> setJustification(Printer::JUSTIFY_CENTER);
   $printer -> text("GRACIAS POR SU PREFERENCIA...");
+  $printer->feed();
+  $printer->feed();
   $printer -> setJustification();
   
   

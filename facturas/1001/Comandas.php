@@ -14,7 +14,7 @@ public function ImprimirComanda($data){
     // $data['panel'] = 0; // maneja el tipo de panel a imprimir
 
     if ($data['panel'] == 1) {
-        $printer = "EOM-200";
+        $printer = "EOM-POS";
         $panel = "COCINA";
         if ($data['tipo_impresion'] == 2) {
             $this->Comanda($data, $printer, $panel);
@@ -67,7 +67,7 @@ $printer -> setTextSize(1, 2);
 $printer -> setLineSpacing(20);
 
 
-$printer -> text("_______________________________________________");
+$printer -> text("______________________________________________");
 $printer->feed();
 
 
@@ -85,7 +85,7 @@ $printer->feed();
 }
 
  
-$printer -> text("_______________________________________________");
+$printer -> text("______________________________________________");
 $printer->feed();
 
 $printer -> text("ORDEN NUMERO: " . $data['numero_documento']);
@@ -100,12 +100,12 @@ $printer->feed();
 
 // nombre de mesa
 if($data['mesa']['nombre_mesa'] != NULL){
-  $printer -> text("Mesa: " . $data['mesa']['nombre_mesa']);
+  $printer -> text(" " . $data['mesa']['nombre_mesa']);
   $printer->feed();
 }
 
-if($data['mesa']['comentarios'] != NULL){
-  $printer -> text("Mesa: " . $data['mesa']['comentarios']);
+if($data['mesa']['comentario'] != NULL){
+  $printer -> text("Comentario: " . $data['mesa']['comentario']);
   $printer->feed();
 }
 
@@ -170,7 +170,7 @@ $printer->feed();
 
 $printer -> setFont(Printer::FONT_B);
 
-$printer -> setTextSize(1, 2);
+$printer -> setTextSize(2, 2);
 $printer -> setLineSpacing(40);
 
 
@@ -208,12 +208,12 @@ $printer->feed();
 // nombre de mesa
 // nombre de mesa
 if($data['mesa']['nombre_mesa'] != NULL){
-  $printer -> text("Mesa: " . $data['mesa']['nombre_mesa']);
+  $printer -> text(" " . $data['mesa']['nombre_mesa']);
   $printer->feed();
 }
 
-if($data['mesa']['comentarios'] != NULL){
-  $printer -> text("Mesa: " . $data['mesa']['comentarios']);
+if($data['mesa']['comentario'] != NULL){
+  $printer -> text("Comentario: " . $data['mesa']['comentario']);
   $printer->feed();
 }
 
