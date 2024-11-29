@@ -49,6 +49,11 @@ if($data["identidad"] != NULL){
 		$fac->AbrirCaja($data); 
 	}
 
+	if($data["tipo_impresion"] == 6){ /// Gastos
+		include_once 'facturas/'.$data["identidad"].'/Gastos.php'; 
+			$fac->Gastos($data); 
+		}
+
 	// cortes
 	if($data["tipo_impresion"] == 10){ /// Corte de Caja
 		include_once 'facturas/'.$data["identidad"].'/Cortes.php'; // documento de precuenta
