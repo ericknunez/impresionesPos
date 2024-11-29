@@ -11,8 +11,14 @@ public function Factura($data){
 // Solo peara la precuenta del cliente en termico
 public function PreCuenta($data){
     $doc = new Precuenta();
-    $printer = "TICKET";
-    $doc->PrecuentaPrint($data, $printer);
+    if($data['cajero'] == "El Barchito"){
+        $printer = "BARCHITO";
+        $doc->PrecuentaPrint($data, $printer);
+    }else{
+        $printer = "TICKET";
+        $doc->PrecuentaPrint($data, $printer);
+    }
+
 }
 
 // comandas para cocina a diferente panel
@@ -52,6 +58,13 @@ public function ReporteDiario($data){
     $doc = new CorteDeCaja();
     $printer = "TICKET";
     $doc->ReporteDiario($data, $printer);
+}
+
+//imprimir gastos
+public function Gastos($data){
+    $doc = new Gastos();
+    $printer = "TICKET";
+    $doc->GastosPrint($data, $printer);
 }
 
 

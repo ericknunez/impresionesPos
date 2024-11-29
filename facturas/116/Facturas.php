@@ -19,16 +19,21 @@ class Facturas {
 
 public function ImprimirFactura($data){
     // $data['documento_factura'] = 0; // maneja el tipo de documento a imprimir
-    $printer = "TICKET";
+
     if ($data['documento_factura'] == 0) {
         $this->Ninguno();
     }
     if ($data['documento_factura'] == 1) {
+        $printer = "TICKET";
         $this->Ticket($data, $printer);
     }
     if ($data['documento_factura'] == 2) {
-        // $this->Factura();
-        $this->Ticket($data, $printer);
+        $printer = "EPSON LX-350";
+        $this->Factura($data, $printer);
+    }
+	if ($data['documento_factura'] == 3) {
+        $printer = "EPSON LX-350";
+        $this->CreditoFiscal($data, $printer);
     }
 }
 
@@ -71,7 +76,7 @@ public function Ticket($data, $printer){
   $printer->text("Chalchuapa");
   $printer->feed();
 
-  $printer->text("TELEFONO: 2408-0653" . $data['empresa_telefono']);
+  $printer->text("TELEFONO: 7547-8651 o 2408-0653" . $data['empresa_telefono']);
 
   
   $printer->feed();
@@ -140,15 +145,15 @@ public function Ticket($data, $printer){
   $printer->feed();
   
 
-  if($data['cliente_nombre'] != NULL){
+  if($data['tipo_servicio'] == 3){
     $printer -> text("Cliente: " . $data['cliente_nombre']);
     $printer->feed();
   }
-  if($data['cliente_direccion'] != NULL){
+  if($data['tipo_servicio'] == 3){
     $printer -> text($data['cliente_direccion']);
     $printer->feed();
   }
-  if($data['cliente_telefono'] != NULL){
+  if($data['tipo_servicio'] == 3){
     $printer -> text("Telefono: " . $data['cliente_telefono']);
     $printer->feed();
   }
@@ -164,13 +169,16 @@ public function Ticket($data, $printer){
   
 // llevar o comer aqui
 if($data['llevar_aqui'] != NULL){
-  if ($data['llevar_aqui'] == 1) {
-    $tipo = "LLevar";
+  if ($data['tipo_servicio'] == 3 && $data['llevar_aqui'] == 1) {
+    $tipo = "DOMICILIO";
+  } 
+  else if ($data['llevar_aqui'] == 1) {
+    $tipo = "LLEVAR";
   } else {
-    $tipo = "Comer Aqui";
+    $tipo = "COMER AQUI";
   }
   $printer -> text( $tipo);
-   $printer->feed();
+  $printer->feed();
 }
 
 
@@ -193,8 +201,163 @@ if($data['llevar_aqui'] != NULL){
 }
 
 
-public function Factura(){
-  $this->AbreCaja();
+public function Factura($data, $print){
+  $doc = new Documentos();
+
+  $txt1   = "10"; 
+  $txt2   = $txt1/1.6;
+  $txt3   = "15";
+  $txt4   = "8";
+  $n1   = "15";
+  $n2   = "24";
+  $n3   = "21";
+  $n4   = "10";
+  
+  
+  
+  $handle = printer_open($print);
+  printer_set_option($handle, PRINTER_MODE, "RAW");
+  
+  printer_start_doc($handle, "Mi Documento");
+  printer_start_page($handle);
+  
+  
+  $font = printer_create_font("Verdana", $txt1, $txt2, PRINTER_FW_NORMAL, false, false, false, 0);
+  printer_select_font($handle, $font);
+
+  $oi=60;
+  $oi=$oi+$n1;
+  printer_draw_text($handle, $data['fecha'], 450, $oi+10);
+  $oi=$oi+$n1+$n1;
+  printer_draw_text($handle, strtoupper($data['mesa']['nombre_mesa']), 90, $oi-5);
+  $oi=$oi+$n1+$n1;
+  printer_draw_text($handle, strtoupper($data['cliente']['direccion']), 90, $oi);
+  $oi=$oi+$n1+$n1;
+  printer_draw_text($handle, $data['cliente']['documento'], 145, $oi);
+   
+  $oi=170;
+  foreach ($data['productos'] as $producto) {
+    
+    $letras = strtoupper($producto["producto"]);
+    $primertexto = substr($letras, 0, 34);
+    $segundotexto = substr($letras, 34, 200 );
+
+            $oi=$oi+$n1;
+            printer_draw_text($handle, $producto["cant"], 100, $oi);
+            printer_draw_text($handle, $primertexto, 140, $oi);
+            printer_draw_text($handle, Helpers::Format( $producto['pv']), 380, $oi);
+            printer_draw_text($handle, Helpers::Format($producto["total"]), 550, $oi);
+            if (!empty($segundotexto)) {
+              $oi=$oi+$n1;
+              printer_draw_text($handle, $segundotexto, 140, $oi);
+             }
+      
+    }
+
+  $oi=420;
+  $oi=$oi+$n3+$n1;
+  printer_draw_text($handle, Dinero::DineroEscrito($data['total']+$data['propina_cant']), 70, $oi+$n1+5);
+  printer_draw_text($handle, Helpers::Format($data['total']), 550, $oi+$n1+5);
+
+  
+  $oi=$oi+$n1+$n1+$n1+$n1+$n1+$n1+$n1;
+  printer_draw_text($handle, Helpers::Format($data['propina_cant']), 550, $oi-$n1);
+  printer_draw_text($handle, Helpers::Format($data['total']+$data['propina_cant']), 550, $oi);
+  
+
+  
+  
+  if ($data['caja'] == 1) {
+  printer_write($handle, chr(27).chr(112).chr(48).chr(55).chr(121)); //enviar pulso
+  }
+
+
+
+  
+  printer_end_page($handle);
+  printer_end_doc($handle);
+  printer_close($handle);
+  
+
+}
+
+
+
+public function CreditoFiscal($data, $print){
+  $doc = new Documentos();
+
+  $txt1   = "15"; 
+  $txt2   = "10";
+  $txt3   = "15";
+  $txt4   = "8";
+  $n1   = "18";
+  $n2   = "24";
+  $n3   = "21";
+  $n4   = "10";
+  
+  
+  
+  $handle = printer_open($print);
+  printer_set_option($handle, PRINTER_MODE, "RAW");
+  
+  printer_start_doc($handle, "Mi Documento");
+  printer_start_page($handle);
+  
+  
+  $font = printer_create_font("Arial", $txt1, $txt2, PRINTER_FW_NORMAL, false, false, false, 0);
+  printer_select_font($handle, $font);
+  
+  $oi=100;
+  $oi=$oi+$n1;
+  printer_draw_text($handle, $data['fecha'], 380, $oi+$n1+$n1);
+  $oi=$oi+$n1+$n1;
+  printer_draw_text($handle, $data['cliente']['cliente'], 90, $oi);
+  $oi=$oi+$n1+$n1;
+  printer_draw_text($handle, $data['cliente']['direccion'], 90, $oi);
+  $oi=$oi+$n1+$n1;
+  printer_draw_text($handle, $data['cliente']['documento'], 130, $oi);
+   
+  $oi=300;
+  foreach ($data['productos'] as $producto) {
+  
+    
+  
+            $oi=$oi+$n1;
+            printer_draw_text($handle, $producto["cant"], 100, $oi);
+            printer_draw_text($handle, $producto["producto"], 140, $oi);
+            printer_draw_text($handle, $producto['pv'], 330, $oi);
+            printer_draw_text($handle, $producto["total"], 475, $oi);
+  
+
+    }
+
+  $oi=615;
+  $oi=$oi+$n3+$n1;
+  printer_draw_text($handle, Dinero::DineroEscrito($data['total']+$data['propina_cant']), 90, $oi);
+  printer_draw_text($handle, Helpers::Format($data['subtotal']), 475, $oi);
+  printer_draw_text($handle, Helpers::Format($data['impuestos']), 475, $oi+$n1);
+  printer_draw_text($handle, Helpers::Format($data['total']), 475, $oi+$n1+$n1);
+
+  
+  $oi=$oi+$n1+$n1+$n1+$n1+$n1+$n1+$n1+$n1+$n1+$n1;
+  printer_draw_text($handle, Helpers::Format($data['propina_cant']), 475, $oi-$n1);
+  printer_draw_text($handle, Helpers::Format($data['total']+$data['propina_cant']), 475, $oi);
+  
+
+  
+  
+  if ($data['caja'] == 1) {
+  printer_write($handle, chr(27).chr(112).chr(48).chr(55).chr(121)); //enviar pulso
+  }
+
+
+
+  
+  printer_end_page($handle);
+  printer_end_doc($handle);
+  printer_close($handle);
+  
+
 }
 
 

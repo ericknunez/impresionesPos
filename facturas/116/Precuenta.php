@@ -46,7 +46,7 @@ $printer->feed();
 $printer->text("Chalchuapa");
 $printer->feed();
 
-$printer->text("TELEFONO: 2408-0653" . $data['empresa_telefono']);
+$printer->text("TELEFONO: 7547-8651 o 2408-0653" . $data['empresa_telefono']);
 // $printer->text("TELEFONO: " . $data['empresa_telefono']);
   
   $printer->feed();
@@ -107,15 +107,15 @@ $printer->text("TELEFONO: 2408-0653" . $data['empresa_telefono']);
   $printer->feed();
   
 
-  if($data['cliente_nombre'] != NULL){
+  if($data['tipo_servicio'] == 3){
     $printer -> text("Cliente: " . $data['cliente_nombre']);
     $printer->feed();
   }
-  if($data['cliente_direccion'] != NULL){
+  if($data['tipo_servicio'] == 3){
     $printer -> text($data['cliente_direccion']);
     $printer->feed();
   }
-  if($data['cliente_telefono'] != NULL){
+  if($data['tipo_servicio'] == 3){
     $printer -> text("Telefono: " . $data['cliente_telefono']);
     $printer->feed();
   }
@@ -132,13 +132,16 @@ $printer->text("TELEFONO: 2408-0653" . $data['empresa_telefono']);
   
 // llevar o comer aqui
 if($data['llevar_aqui'] != NULL){
-  if ($data['llevar_aqui'] == 1) {
-    $tipo = "LLevar";
+  if ($data['tipo_servicio'] == 3 && $data['llevar_aqui'] == 1) {
+    $tipo = "DOMICILIO";
+  } 
+  else if ($data['llevar_aqui'] == 1) {
+    $tipo = "LLEVAR";
   } else {
-    $tipo = "Comer Aqui";
+    $tipo = "COMER AQUI";
   }
   $printer -> text( $tipo);
-   $printer->feed();
+  $printer->feed();
 }
 
 

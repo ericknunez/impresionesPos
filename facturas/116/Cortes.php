@@ -28,7 +28,16 @@ public function CortePrint($data, $printer){
     
     $printer -> setJustification(Printer::JUSTIFY_CENTER);
     
+    $printer -> text("LA RINCONCHITA");
+    $printer->feed();
     $printer -> text("RESUMEN DE CORTE DE CAJA");
+    $printer->feed();
+    $printer -> text("USUARIO: " . $data['cajero']);
+    $printer->feed();
+    $printer -> text("FECHA APERTURA: " . $data['apertura']);
+    $printer->feed();
+    $printer -> text("FECHA CIERRE: " . $data['cierre']);
+    $printer->feed();
     
     /* Stuff around with left margin */
     $printer->feed();
@@ -40,12 +49,12 @@ public function CortePrint($data, $printer){
     
     $printer -> setJustification(Printer::JUSTIFY_LEFT);
     $printer -> setEmphasis(true);
-    $printer -> text($doc->Item("Cant", 'Producto', 'Precio', 'Total'));
+    //$printer -> text($doc->Item("Cant", 'Producto', 'Precio', 'Total'));
     $printer -> setEmphasis(false);
     
     
 
-    foreach ($data['productos'] as $producto) {
+   /* foreach ($data['productos'] as $producto) {
       $printer -> text($doc->Item( $producto['cant'], $producto['producto'], Helpers::Dinero($producto['pv']), Helpers::Dinero($producto['total']))); 
     }
     
@@ -53,23 +62,25 @@ public function CortePrint($data, $printer){
     
     $printer -> text("_______________________________________________________");
     $printer->feed();
-    
+    */
        
     
-    $printer -> text($doc->DosCol("VENTA EN EFECTIVO: ", 40, Helpers::Dinero($data['total_efectivo']), 10));
+    $printer -> text($doc->DosCol("VENTA EN EFECTIVO: ", 40, Helpers::Dinero($data['total_efectivo'] + $data['efectivoPagoMixto']), 10));
     
-    $printer -> text($doc->DosCol("PROPINA EN EFECTIVO: ", 40, Helpers::Dinero($data['propina_efectivo']), 10));
+    //$printer -> text($doc->DosCol("PROPINA EN EFECTIVO: ", 40, Helpers::Dinero($data['propina_efectivo']), 10));
     
-    $printer -> text($doc->DosCol("VENTA CON TARJETA: ", 40, Helpers::Dinero($data['total_tarjeta']), 10));
+    $printer -> text($doc->DosCol("VENTA CON TARJETA: ", 40, Helpers::Dinero($data['total_tarjeta'] + $data['pagoMixto'] - $data['efectivoPagoMixto']), 10));
     
-    $printer -> text($doc->DosCol("PROPINA CON TARJETA: ", 40, Helpers::Dinero($data['propina_no_efectivo']), 10));
-    
-    
-    
+    //$printer -> text($doc->DosCol("PROPINA CON TARJETA: ", 40, Helpers::Dinero($data['propina_no_efectivo']), 10));
+
+    $printer -> text($doc->DosCol("TOTAL TRANFERENCIAS: ", 40, Helpers::Dinero($data['transferencias']), 10));
+        
+    $printer -> text($doc->DosCol("TOTAL CREDITOS: ", 40, Helpers::Dinero($data['creditos']), 10));
+        
     $printer -> text($doc->DosCol("TOTAL DE VENTA: ", 40, Helpers::Dinero($data['total_venta']), 10));
     
       
-    $printer -> text($doc->DosCol("TOTAL DE PROPINA: ", 40, Helpers::Dinero($data['propina_efectivo'] + $producto['propina_no_efectivo']), 10));
+    //$printer -> text($doc->DosCol("TOTAL DE PROPINA: ", 40, Helpers::Dinero($data['propina_efectivo'] + $producto['propina_no_efectivo']), 10));
     
         
     // $printer -> text($doc->DosCol("TOTAL: ", 40, Helpers::Dinero($data['total_venta'] + $producto['total_venta']), 10));
@@ -93,13 +104,13 @@ public function CortePrint($data, $printer){
     
     
     
-    $printer -> text($doc->DosCol("GASTOS REGISTRADOS: ", 40, Helpers::Dinero($data['gastos']), 10));
+    $printer -> text($doc->DosCol("(-)GASTOS REGISTRADOS: ", 40, Helpers::Dinero($data['gastos']), 10));
     
     
     $printer -> text($doc->DosCol("REMESAS: ", 40, Helpers::Dinero($data['remesas']), 10));
 
 
-    $printer -> text($doc->DosCol("ABONOS: ", 40, Helpers::Dinero($data['abonos']), 10));
+    $printer -> text($doc->DosCol("ABONOS REALIZADOS: ", 40, Helpers::Dinero($data['abonos']), 10));
     
     
     $printer -> text("__________________________________________________");
@@ -108,15 +119,17 @@ public function CortePrint($data, $printer){
     
     
     
-    $printer -> text($doc->DosCol("DINERO EN APERTURA: ", 40, Helpers::Dinero($data['efectivo_inicial']), 10));
-    
-   // $printer -> text($doc->DosCol("EFECTIVO INGRESADO: ", 40, Helpers::Dinero($data['efectivo_final']), 10));
+    $printer -> text($doc->DosCol("(+)DINERO EN APERTURA: ", 40, Helpers::Dinero($data['efectivo_inicial']), 10));
 
-    $printer -> text($doc->DosCol("EFECTIVO DEBIDO: ", 40, Helpers::Dinero($data['total_efectivo']), 10));
+    $printer -> text($doc->DosCol("EFECTIVO EN CAJA: ", 40, Helpers::Dinero($data['total_efectivo']+$data['efectivoPagoMixto']-$data['gastos']-$data['remesas']), 10));
+    
+    $printer -> text($doc->DosCol("ARQUEO CAJA: ", 40, Helpers::Dinero($data['efectivo_final']), 10));
+
+    //$printer -> text($doc->DosCol("EFECTIVO DEBIDO: ", 40, Helpers::Dinero($data['total_efectivo']), 10));
 
     
     
-    $printer -> text($doc->DosCol("DIFERENCIA: ", 40, Helpers::Dinero($data['diferencia']), 10));
+    //$printer -> text($doc->DosCol("DIFERENCIA: ", 40, Helpers::Dinero($data['diferencia']), 10));
     
     $printer -> text("_______________________________________________________");
     $printer->feed();

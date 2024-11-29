@@ -1,4 +1,4 @@
-
+                                                                                  
  <?php
 
 use Mike42\Escpos\EscposImage;
@@ -9,12 +9,31 @@ use Mike42\Escpos\Printer;
 
 class Comandas {
 
+public function Pulso($print){
+
+  
+  $handle = printer_open($print);
+  printer_set_option($handle, PRINTER_MODE, "RAW");
+  
+  printer_start_doc($handle, "Mi Documento");
+  printer_start_page($handle);
+  
+  printer_write($handle, chr(27).chr(112).chr(48).chr(55).chr(121)); //enviar pulso
+
+  
+  printer_end_page($handle);
+  printer_end_doc($handle);
+  printer_close($handle);
+  
+
+}
+
 
 public function ImprimirComanda($data){
     // $data['panel'] = 0; // maneja el tipo de panel a imprimir
 
     if ($data['panel'] == 1) {
-        $printer = "LR200";
+        $printer = "COCINASS";
         $panel = "COCINA";
         if ($data['tipo_impresion'] == 2) {
             $this->Comanda($data, $printer, $panel);
@@ -25,7 +44,7 @@ public function ImprimirComanda($data){
     }
 
     if ($data['panel'] == 2) {
-      $printer = "BAR2";
+      $printer = "BARCHITO";
       $panel = "BAR";
       if ($data['tipo_impresion'] == 2) {
           $this->Comanda($data, $printer, $panel);
@@ -37,6 +56,16 @@ public function ImprimirComanda($data){
       }
     }
 
+    if ($data['panel'] == 3) {
+      $printer = "COCINASS";
+      $panel = "PUPUSERIA";
+      if ($data['tipo_impresion'] == 2) {
+          $this->Comanda($data, $printer, $panel);
+      }
+      if ($data['tipo_impresion'] == 4) {
+          $this->ComandaBorrada($data, $printer, $panel);
+      }
+  }
     /// DECLARAR EL PANEL DOS AQUI ABAJO CON LA IMPRESORA Y EL NOMBRE DEL PANEL
 
 }
@@ -55,6 +84,26 @@ $printer -> initialize();
 $printer -> selectPrintMode(Printer::MODE_DOUBLE_HEIGHT);
 $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
 $printer -> setJustification(Printer::JUSTIFY_CENTER);
+$printer->feed();
+$printer->feed();
+// nombre de mesa
+if($data['mesa']['nombre_mesa'] != NULL){
+  $printer -> text("Mesa: " . $data['mesa']['nombre_mesa']);
+  $printer->feed();
+}
+// llevar o comer aqui
+if($data['tipo_servicio']  != NULL){
+  if ($data['tipo_servicio'] == 3) {
+    $tipo = "DOMICILIO";
+  } 
+  else if ($data['tipo_servicio'] == 2) {
+    $tipo = "COMER AQUI";
+  } else {
+    $tipo = "";
+  }
+  $printer -> text( $tipo);
+  $printer->feed();
+}
 $printer -> text("COMANDA DE " . $panel);
 $printer->feed();
 $printer -> setJustification(Printer::JUSTIFY_LEFT);
@@ -98,34 +147,25 @@ $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 20));
 $printer -> text("Cajero: " . $data['cajero']);
 $printer->feed();
 
-// nombre de mesa
-if($data['mesa']['nombre_mesa'] != NULL){
-  $printer -> text("Mesa: " . $data['mesa']['nombre_mesa']);
-  $printer->feed();
-}
-
-if($data['mesa']['comentarios'] != NULL){
-  $printer -> text("Mesa: " . $data['mesa']['comentarios']);
-  $printer->feed();
-}
-
-// llevar o comer aqui
-if($data['llevar_aqui'] != NULL){
-  if ($data['llevar_aqui'] == 1) {
-    $tipo = "LLevar";
-  } else {
-    $tipo = "Comer Aqui";
-  }
-  $printer -> text( $tipo);
-   $printer->feed();
-}
-
 // comentarios
+if($data['mesa']['comentario'] != NULL){
+  $printer -> text("Comentario: " . $data['mesa']['comentario']);
+  $printer->feed();
+}
+
+if($data['tipo_servicio'] == 3){
+  $printer -> text("Cliente: " . $data['cliente_nombre']);
+  $printer->feed();
+}
+
 
 
 $printer->feed();
-$printer->cut();
+$printer->feed();
+$printer->feed(5);
+$printer->cut(5);
 $printer->close();
+$this->Pulso($printer);
 
 
 }
@@ -151,6 +191,24 @@ $printer -> selectPrintMode(Printer::MODE_DOUBLE_WIDTH);
 $printer -> setJustification(Printer::JUSTIFY_CENTER);
 $printer -> setEmphasis(true);
 $printer -> text("ELIMINADA");
+// nombre de mesa
+if($data['mesa']['nombre_mesa'] != NULL){
+  $printer -> text("Mesa: " . $data['mesa']['nombre_mesa']);
+  $printer->feed();
+}
+// llevar o comer aqui
+if($data['llevar_aqui'] != NULL){
+  if ($data['tipo_servicio'] == 3 && $data['llevar_aqui'] == 1) {
+    $tipo = "DOMICILIO";
+  } 
+  else if ($data['llevar_aqui'] == 1) {
+    $tipo = "LLEVAR";
+  } else {
+    $tipo = "COMER AQUI";
+  }
+  $printer -> text( $tipo);
+  $printer->feed();
+}
 $printer->feed();
 $printer -> setEmphasis(false);
 $printer -> text("COMANDA DE " . $panel);
@@ -197,32 +255,16 @@ $printer -> text($doc->DosCol($data['fecha'], 30, $data['hora'], 20));
 $printer -> text("Cajero: " . $data['cajero']);
 $printer->feed();
 
-// nombre de mesa
-// nombre de mesa
-if($data['mesa']['nombre_mesa'] != NULL){
-  $printer -> text("Mesa: " . $data['mesa']['nombre_mesa']);
-  $printer->feed();
-}
-
-if($data['mesa']['comentarios'] != NULL){
-  $printer -> text("Mesa: " . $data['mesa']['comentarios']);
-  $printer->feed();
-}
-
-
-// llevar o comer aqui
-if($data['llevar_aqui'] != NULL){
-  if ($data['llevar_aqui'] == 1) {
-    $tipo = "LLevar";
-  } else {
-    $tipo = "Comer Aqui";
-  }
-  $printer -> text( $tipo);
-   $printer->feed();
-}
-
 // comentarios
+if($data['mesa']['comentario'] != NULL){
+  $printer -> text("Comentario: " . $data['mesa']['comentario']);
+  $printer->feed();
+}
 
+if($data['tipo_servicio'] == 3){
+  $printer -> text("Cliente: " . $data['cliente_nombre']);
+  $printer->feed();
+}
 
 $printer->feed();
 $printer->cut();
