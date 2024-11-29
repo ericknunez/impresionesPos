@@ -141,15 +141,15 @@ public function Ticket($data, $printer){
   $printer->feed();
   
 
-  if($data['cliente_nombre'] != NULL && $data['tipo_servicio'] != 1){
+  if($data['tipo_servicio'] == 3){
     $printer -> text("Cliente: " . $data['cliente_nombre']);
     $printer->feed();
   }
-  if($data['cliente_direccion'] != NULL && $data['tipo_servicio'] != 1){
+  if($data['tipo_servicio'] == 3){
     $printer -> text($data['cliente_direccion']);
     $printer->feed();
   }
-  if($data['cliente_telefono'] != NULL && $data['tipo_servicio'] != 1){
+  if($data['tipo_servicio'] == 3){
     $printer -> text("Telefono: " . $data['cliente_telefono']);
     $printer->feed();
   }
@@ -159,19 +159,22 @@ public function Ticket($data, $printer){
   
   // nombre de mesa
   if($data['mesa']['nombre_mesa'] != NULL){
-    $printer -> text("Mesa: " . $data['mesa']['nombre_mesa']);
+    $printer -> text(" " . $data['mesa']['nombre_mesa']);
     $printer->feed();
   }
   
 // llevar o comer aqui
 if($data['llevar_aqui'] != NULL){
-  if ($data['llevar_aqui'] == 1) {
-    $tipo = "LLevar";
+  if ($data['tipo_servicio'] == 3 && $data['llevar_aqui'] == 1) {
+    $tipo = "DOMICILIO";
+  } 
+  else if ($data['llevar_aqui'] == 1) {
+    $tipo = "LLEVAR";
   } else {
-    $tipo = "Comer Aqui";
+    $tipo = "COMER AQUI";
   }
   $printer -> text( $tipo);
-   $printer->feed();
+  $printer->feed();
 }
 
 
@@ -179,11 +182,27 @@ if($data['llevar_aqui'] != NULL){
 
   $printer -> text("_______________________________________________");
   $printer->feed();
+
+  $puntos = intval($data['total']/ 10 ); 
+
+if($puntos == 1){
+    $mensaje =  "HAZ ACUMULADO 1 PUNTO";
+}elseif ($puntos > 1){
+    $mensaje =  "HAZ ACUMULADO " .$puntos. " PUNTOS";
+}else{
+    $mensaje =  " "; 
+}
   
   
   $printer->feed();
   $printer -> setJustification(Printer::JUSTIFY_CENTER);
   $printer -> text("GRACIAS POR SU PREFERENCIA...");
+  $printer->feed();
+  $printer -> text("POR CADA $10.00 DLS DE COMPRA OBTIENES 1 PUNTO");
+  $printer->feed();
+  $printer -> text("POR CADA 10 PUNTOS TE GANAS UNA PIZZA GRANDE DE PEPERONI");
+  $printer->feed();
+  $printer -> text($mensaje);
   $printer->feed();
   $printer->feed();
   $printer -> setJustification();
