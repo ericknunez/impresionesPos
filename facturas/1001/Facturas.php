@@ -71,7 +71,7 @@ public function Ticket($data, $printer){
 
   $printer->text("Nueva Esparta, La Unión ");
   $printer->feed();
-  $printer->text("TELEFONO: 2282-3126 / 7503-7702");
+  $printer->text("TELEFONO: 2682-3126 / 7503-7702");
 
   
   $printer->feed();
@@ -141,20 +141,18 @@ public function Ticket($data, $printer){
   $printer -> text("Cajero: " . $data['cajero']);
   $printer->feed();
   
-
-  if($data['cliente_nombre'] != NULL){
+  if($data['tipo_servicio'] == 3){
     $printer -> text("Cliente: " . $data['cliente_nombre']);
     $printer->feed();
   }
-  if($data['cliente_direccion'] != NULL){
+  if($data['tipo_servicio'] == 3){
     $printer -> text($data['cliente_direccion']);
     $printer->feed();
   }
-  if($data['cliente_telefono'] != NULL){
+  if($data['tipo_servicio'] == 3){
     $printer -> text("Telefono: " . $data['cliente_telefono']);
     $printer->feed();
   }
-  
   // datos del cliente delivery
   
   
@@ -180,11 +178,26 @@ if($data['llevar_aqui'] != NULL){
 
   $printer -> text("_______________________________________________");
   $printer->feed();
-  
+
+$puntos = intval($data['total']/ 10 ); 
+
+if($puntos == 1){
+    $mensaje =  "HAZ ACUMULADO 1 PUNTO";
+}elseif ($puntos > 1){
+    $mensaje =  "HAZ ACUMULADO " .$puntos. " PUNTOS";
+}else{
+    $mensaje =  " "; 
+}
   
   $printer->feed();
   $printer -> setJustification(Printer::JUSTIFY_CENTER);
   $printer -> text("GRACIAS POR SU PREFERENCIA...");
+  $printer->feed();
+  $printer -> text("POR CADA $10.00 DLS DE COMPRA OBTIENES 1 PUNTO");
+  $printer->feed();
+  $printer -> text("POR CADA 10 PUNTOS TE GANAS UNA PIZZA GRANDE DE PEPERONI");
+  $printer->feed();
+  $printer -> text($mensaje);
   $printer->feed();
   $printer->feed();
   $printer -> setJustification();
